@@ -25,8 +25,8 @@ header {
 
 header a {
   margin: 0px 10px;
-  text-decoration: none;
   color: gray;
+  text-decoration: none;
 }
 
 header a:focus,
@@ -34,22 +34,113 @@ header a:hover {
   color: black;
 }
 
-/* footer */
-footer {
-  background-color: #f2f2f2;
-  min-height: 40px;
-  padding: 20px 40px;
-  font-size: 14px;
-  text-align: center;
+/* post navigation */
+.post__navigation {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+  gap: 12px;
+  margin: 0 auto;
+  padding: 48px 20px 0px 20px;
+  max-width: 680px;
+  font-size: 16px;
+  color: gray;
+  cursor: pointer;
+}
+
+.post__navigation--active {
+  font-weight: 600;
+  color: black;
 }
 
 /* post list */
-.post-list {
+.post__list {
+  padding: 20px;
+  max-width: 680px;
   min-height: 90vh;
-  padding: 20px 40px;
   text-align: center;
+  margin: 0 auto;
+  text-align: left;
+  line-height: 24px;
+}
+
+.post__box {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-top: 1px solid #f2f2f2;
+}
+
+.post__profile-box {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.post__profile {
+  width: 36px;
+  height: 36px;
+  background-color: #f2f2f2;
+  border-radius: 50%;
+}
+
+.post__author-name,
+.post__date {
+  color: gray;
+}
+
+.post__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 14px 0px;
+}
+
+.post__text {
+  color: dimgray;
+  font-size: 16px;
+}
+
+.post__utils-box {
+  display: flex;
+  gap: 8px;
+  flex-direction: row-reverse;
+  font-size: 14px;
+  color: gray;
+}
+
+.post__delete:hover,
+.post__delete:focus {
+  color: black;
+}
+
+.post__edit:hover,
+.post__edit:focus {
+  color: black;
+}
+
+.post__list a {
+  text-decoration: none;
+  color: black;
+}
+
+/* footer */
+footer {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 40px;
+  min-height: 40px;
+  background-color: #f2f2f2;
+  font-size: 14px;
+  text-align: center;
+}
+
+footer a {
+  margin: 0px 10px;
+  color: gray;
+  text-decoration: none;
+}
+
+footer a:focus,
+footer a:hover {
+  color: black;
 }

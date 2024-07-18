@@ -1,11 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": "src", // 절대경로를 기준으로하는 기본 디렉토리를 지정하는 것을 말함
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,7 +17,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "paths": {
+    // paths는 모듈의 이름과 해당 파일의 경로를 맵핑하는 설정임
+    "pages/*": ["pages/*"],
+    "components/*": ["components/*"]
+  }
 }

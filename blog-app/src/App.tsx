@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+// yarn create react-app blog-app --template typescript
+
 function App() {
   return (
     <div className="App">

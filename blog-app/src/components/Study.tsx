@@ -69,3 +69,17 @@ export default function Study(){
  * 3. Authentication 서비스 불러오기
  * - firebase/auth 에서 getAuth, signInWithEmailAndPassword 등 이미 구현되어 있는 함수 불러와 사용
  */
+
+/**
+ * 사용법
+ * 홈페이지 => authentication => 로그인 방법 탭 => 이메일/비밀번호 => 저장 // 이제부터는 사용자 탭에 하나씩 데이터가 쌓일거임
+ * 템플릿 탭 => 이메일 보낸다 하면 이메일 템플릿 수정가능, 비밀번호 재설정, 이메일 주소 변경 여러가지 설정 가능
+ * 사용량 탭 => 일일 활성 사용자 수 등등
+ * 설정 탭 => 승인된 도메인(보안과 관련된 작업)
+ * 
+ * 
+ * https://firebase.google.com/docs/auth?hl=ko
+ * 위 페이지에서 웹 => 사용자 관리
+ * 첫 줄 보면 신규 사용자를 생성할 때는 createUserWithEmailAndPassword 메서드
+ * 중요한 부분은 현재 로그인한 사용자 가져오기 코드
+ */

@@ -7,14 +7,14 @@ import PostEdit from "pages/posts/edit";
 import ProfilePage from "pages/profile";
 import LoginPage from "pages/login";
 import SignupPage from "pages/signup";
-import { useState } from "react";
+
+interface RouterProps {
+  isAuthenticated: boolean;
+}
 
 // Navigate 의 replace 속성은 이전 페이지로 못 돌아가게 막음
 
-export default function Router() {
-  // Firebase Auth가 인증되었으면 true로 변경해주는 로직 추가
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
+export default function Router({ isAuthenticated }: RouterProps) {
   return (
     <>
       <Routes>

@@ -8,6 +8,8 @@ import ProfilePage from "pages/profile";
 import LoginPage from "pages/login";
 import SignupPage from "pages/signup";
 
+// Navigate 의 replace 속성은 이전 페이지로 못 돌아가게 막음
+
 export default function Router() {
   return (
     <>

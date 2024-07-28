@@ -136,14 +136,25 @@ footer a:hover {
   color: gray;
 }
 
+.post__delete {
+  cursor: pointer;
+}
+
 .post__delete:hover,
 .post__delete:focus {
   color: black;
 }
 
 .post__edit:hover,
-.post__edit:focus {
+.post__edit:focus,
+.post__edit a:hover,
+.post__edit a:focus {
   color: black;
+}
+
+.post__edit a {
+  text-decoration: none;
+  color: gray;
 }
 
 .post__list a {
@@ -177,13 +188,13 @@ footer a:hover {
   display: flex;
   gap: 18px;
   align-items: center;
-  font-size: 18px;
-  margin: 0 auto;
-  max-width: 680px;
-  text-align: left;
-  line-height: 24px;
   justify-content: space-between;
+  margin: 0 auto;
   padding: 20px;
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
 }
 
 .flex__box-lg {
@@ -200,8 +211,8 @@ footer a:hover {
 }
 
 .profile__name {
-  font-size: 16px;
   padding-top: 4px;
+  font-size: 16px;
 }
 
 .profile__email {
@@ -209,8 +220,8 @@ footer a:hover {
 }
 
 .profile__logout {
-  color: gray;
   font-size: 14px;
+  color: gray;
 }
 
 .profile__logout:hover,
@@ -221,17 +232,17 @@ footer a:hover {
 /* carousel */
 .carousel {
   margin: 0 auto;
-  max-width: 980px;
   margin-top: 36px;
+  max-width: 980px;
 }
 
 ul.carousel__slides {
   display: block;
-  position: relative;
-  height: 400px;
   margin: 0;
   padding: 0;
   overflow: hidden; /* 삐져 나온 곳 숨기기 */
+  position: relative;
+  height: 400px;
   list-style: none;
 }
 
@@ -255,11 +266,11 @@ ul.carousel__slides input {
 .carousel__slide-img {
   display: block;
   position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
-  top: 0;
-  opacity: 0;
   transition: all 0.7s ease-in-out;
+  opacity: 0;
 }
 
 .carousel__slide-img img {
@@ -271,8 +282,8 @@ ul.carousel__slides input {
 .carousel__controls {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
   z-index: 999;
   font-size: 100px;
   line-height: 400px;
@@ -281,11 +292,11 @@ ul.carousel__slides input {
 
 .carousel__controls label {
   display: none;
-  position: absolute;
   padding: 0 20px;
-  opacity: 0;
+  position: absolute;
   transition: opacity 0.2s;
   cursor: pointer;
+  opacity: 0;
 }
 
 .carousel__slide-img:hover + .carousel__controls label {
@@ -297,40 +308,40 @@ ul.carousel__slides input {
 }
 
 .carousel__controls .carousel__slide-prev {
+  left: 0;
   width: 49%;
   text-align: left;
-  left: 0;
 }
 
 .carousel__controls .carousel__slide-next {
+  right: 0;
   width: 49%;
   text-align: right;
-  right: 0;
 }
 
 .carousel__dots {
   position: absolute;
-  left: 0;
   right: 0;
   bottom: 20px;
+  left: 0;
   z-index: 999;
   text-align: center;
 }
 
 .carousel__dots .carousel__dot {
   display: inline-block;
+  margin: 10px;
   width: 10px;
   height: 10px;
-  border-radius: 50%;
   background-color: #fff;
+  border-radius: 50%;
   opacity: 0.5;
-  margin: 10px;
 }
 
 input:checked + .carousel__slide-container .carousel__slide-img {
+  transition: opacity 1s ease-in-out;
   opacity: 1;
   transform: scale(1);
-  transition: opacity 1s ease-in-out;
 }
 
 input:checked + .carousel__slide-container .carousel__controls label {
@@ -345,4 +356,62 @@ input#img-3:checked ~ .carousel__dots label#img-dot-3 {
 
 input:checked + .carousel__slide-container .nav label {
   display: block;
+}
+
+/* form */
+.form {
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 20px;
+  max-width: 680px;
+}
+
+.form input {
+  padding: 10px 10px;
+  border: 1px solid lightgray;
+  width: 96%;
+  max-width: 680px;
+  height: 20px;
+  font-size: 16px;
+  border-radius: 0.3rem;
+}
+
+.form textarea {
+  padding: 10px 10px;
+  border: 1px solid lightgray;
+  width: 96%;
+  max-width: 680px;
+  min-height: 400px;
+  font-size: 16px;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.form .form__block {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.form label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.form .form__btn--submit {
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+  height: 48px;
+  float: right;
+  background-color: #2563eb;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+.form .form__btn--submit:hover,
+.form .form__btn--submit:focus {
+  background-color: #1945a4;
 }

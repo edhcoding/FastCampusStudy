@@ -1,5 +1,5 @@
-export default function Study(){
-  return <div>Study</div>
+export default function Study() {
+  return <div>Study</div>;
 }
 
 /**
@@ -35,7 +35,7 @@ export default function Study(){
  * - 쿼리 제한: No SQL 데이터 베이스의 간단한 쿼리만 사용 가능
  * - 비용: 확장성이 중요한 경우 비용이 빠르게 증가할 수 있음
  * - 마이그레이션 어려움: 타 백엔드 서비스로 전환하는 경우 추가적인 작업 필요
- * 
+ *
  * 요금 (무료, 유료 다 있음)
  * - https://firebase.google.com/pricing?hl=ko
  * - 무료 요금제에서도 일정량 이상 사용한다면 추가 요금 나오기는 함 주의!
@@ -48,7 +48,7 @@ export default function Study(){
  * - 인증 정보 안전하게 저장
  * - 인증 정보 변경시 실시간으로 앱에 업데이트
  * - 인증 이메일 전송, 비밀번호 재설정 이메일 전송 등의 기능
- * 
+ *
  * 장점
  * 편의성
  * - 복잡한 인증 과정을 Firebase가 대신 처리
@@ -59,10 +59,10 @@ export default function Study(){
  * 보안
  * - 사용자의 비밀번호 안전하게 암호화
  * - HTTPS 이용해 데이터 전송 보안
- * 
+ *
  * 언제 사용 해야할까?
  * - 로그인 시스템, 사용자 프로필 시스템
- * 
+ *
  * 대략적인 사용법
  * 1. Firebase 프로젝트 생성 & Firebase SDK 앱 추가
  * 2. Firebase 초기화
@@ -76,10 +76,37 @@ export default function Study(){
  * 템플릿 탭 => 이메일 보낸다 하면 이메일 템플릿 수정가능, 비밀번호 재설정, 이메일 주소 변경 여러가지 설정 가능
  * 사용량 탭 => 일일 활성 사용자 수 등등
  * 설정 탭 => 승인된 도메인(보안과 관련된 작업)
- * 
- * 
+ *
+ *
  * https://firebase.google.com/docs/auth?hl=ko
  * 위 페이지에서 웹 => 사용자 관리
  * 첫 줄 보면 신규 사용자를 생성할 때는 createUserWithEmailAndPassword 메서드
  * 중요한 부분은 현재 로그인한 사용자 가져오기 코드
+ */
+
+/**
+ * onAuthStateChanged 개념
+ * - Firebase Authentication 서비스에서 제공하는 메서드
+ * - 인증 상태가 변경될 때마다 호출되는 리스너 설정 (로그인, 로그아웃) => 사용자가 로그인 or 로그아웃 할 때 마다 실시간으로 호출 됨
+ *
+ * 사용자 객체를 인수로 받는 콜백 함수 등록
+ * - 사용자의 로그인 상태 확인 후 적절한 작업 수행
+ * - 로그인 상태일 때는 사용자의 정보를, 아니라면 null을 리턴함
+ *
+ * 예시
+ * import { getAuth, onAuthStateChanged } from "firebase/auth";
+ *
+ * useEffect(()=>{
+ *  onAuthStateChanged(auth, (user) => {
+ *    if (user) {
+ *      console.log("사용자가 로그인한 상태입니다.")
+ *    } else {
+ *      console.log("사용자가 로그아웃한 상태입니다.")
+ *    }
+ *    setInt(true);
+ *  });
+ * },[auth]);
+ * 코드설명 - 사용자가 로그인 하거나 로그아웃 할 때 콘솔에 사용자의 상태 출력
+ * onAuthStateChanged를 사용해 사용자의 로그인 상태를 실시간으로 파악하고, 원하는 특정 작업을 수행할 수 있음
+ * https://firebase.google.com/docs/auth/web/manage-users?hl=ko&_gl=1*14c49fg*_up*MQ..*_ga*MzIxODU3ODUwLjE3MjIxODI2OTE.*_ga_CW55HF8NVT*MTcyMjE4MjY5MS4xLjAuMTcyMjE4MjkxNC4wLjAuMA..
  */

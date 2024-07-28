@@ -2,6 +2,8 @@ import { useState } from "react";
 import { app } from "firebaseApp";
 import { getAuth } from "firebase/auth";
 import Router from "./components/Router";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 // yarn create react-app blog-app --template typescript
 
@@ -13,7 +15,12 @@ function App() {
     !!auth?.currentUser
   );
 
-  return <Router isAuthenticated={isAuthenticated} />;
+  return (
+    <>
+      <ToastContainer />
+      <Router isAuthenticated={isAuthenticated} />
+    </>
+  );
 }
 
 export default App;

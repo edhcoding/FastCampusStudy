@@ -40,3 +40,32 @@ export default function Study(){
  * - https://firebase.google.com/pricing?hl=ko
  * - 무료 요금제에서도 일정량 이상 사용한다면 추가 요금 나오기는 함 주의!
  */
+
+/**
+ * Firebase Auth란?
+ * Firebase Authentication: 쉽게 사용자 인증을 구현할 수 있도록 돕는 Firebase 서비스
+ * - 이메일과 비밀번호 인증, 소셜 미디어 인증, 전화번호 인증
+ * - 인증 정보 안전하게 저장
+ * - 인증 정보 변경시 실시간으로 앱에 업데이트
+ * - 인증 이메일 전송, 비밀번호 재설정 이메일 전송 등의 기능
+ * 
+ * 장점
+ * 편의성
+ * - 복잡한 인증 과정을 Firebase가 대신 처리
+ * - 클라이언트 사이드 개발에만 집중
+ * 소셜 미디어 계정 인증
+ * - OAuth 2.0과 Open ID Connect 지원
+ * - 각종 소셜 미디어 계정 이용한 인증 쉽게 구현
+ * 보안
+ * - 사용자의 비밀번호 안전하게 암호화
+ * - HTTPS 이용해 데이터 전송 보안
+ * 
+ * 언제 사용 해야할까?
+ * - 로그인 시스템, 사용자 프로필 시스템
+ * 
+ * 대략적인 사용법
+ * 1. Firebase 프로젝트 생성 & Firebase SDK 앱 추가
+ * 2. Firebase 초기화
+ * 3. Authentication 서비스 불러오기
+ * - firebase/auth 에서 getAuth, signInWithEmailAndPassword 등 이미 구현되어 있는 함수 불러와 사용
+ */

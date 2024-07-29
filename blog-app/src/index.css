@@ -153,8 +153,8 @@ footer a:hover {
 }
 
 .post__edit a {
-  text-decoration: none;
   color: gray;
+  text-decoration: none;
 }
 
 .post__list a {
@@ -222,6 +222,8 @@ footer a:hover {
 .profile__logout {
   font-size: 14px;
   color: gray;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .profile__logout:hover,
@@ -418,19 +420,19 @@ input:checked + .carousel__slide-container .nav label {
 
 /* login form */
 .form--lg {
-  min-height: 70vh;
   margin-top: 10vh;
+  min-height: 70vh;
 }
 
 .form__title {
-  text-align: center;
   margin-bottom: 4px;
+  text-align: center;
 }
 
 .form__link {
   margin-left: 10px;
-  text-decoration: none;
   color: gray;
+  text-decoration: none;
 }
 
 .form__link:hover,
@@ -444,13 +446,13 @@ input:checked + .carousel__slide-container .nav label {
 
 /* loader */
 .loader {
-  width: 48px;
-  height: 48px;
-  position: absolute;
-  inset: 0;
   margin: auto;
   border: 5px solid #2563eb;
-  border-radius: 50%;
+  position: absolute;
   z-index: 9999;
+  width: 48px;
+  height: 48px;
   animation: rotation 1s linear infinite;
+  inset: 0;
+  border-radius: 50%;
 }

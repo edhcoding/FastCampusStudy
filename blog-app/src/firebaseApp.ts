@@ -1,5 +1,6 @@
 import { initializeApp, FirebaseApp, getApp } from "firebase/app";
-import "firebase/auth"
+import { getFirestore } from "firebase/firestore";
+import "firebase/auth";
 
 /**
  * - initializeApp - initializeApp 함수는 Firebase 애플리케이션을 초기화합니다. 이 함수는 Firebase 프로젝트의 구성 객체를 사용하여 Firebase 서비스를 설정합니다. 프로젝트에서 처음으로 Firebase를 사용할 때 호출해야 합니다.
@@ -28,6 +29,9 @@ try {
 // Initialize Firebase
 // const app = initializeApp(firebaseConfig); 원래코드
 const firebase = initializeApp(firebaseConfig);
+
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);
 
 export default firebase;
 

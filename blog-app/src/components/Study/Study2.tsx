@@ -29,4 +29,9 @@ export default function Study2() {
  * 1. Firebase 프로젝트 생성 & Firebase SDK 앱 추가
  * 2. Firestore 인스턴스 가져오기 - getFirestore
  * 3. Firebase 서비스 사용하기
+ * 
+ * 보안규칙
+ * https://firebase.google.com/docs/rules/get-started?hl=ko&authuser=0&_gl=1*s44exs*_ga*MTc5MTAyMzQwOS4xNzIyMTYzMzEz*_ga_CW55HF8NVT*MTcyNDA5MzQwMS4xMS4xLjE3MjQwOTM1MzkuNTEuMC4w
+ * 
+ * 
  */

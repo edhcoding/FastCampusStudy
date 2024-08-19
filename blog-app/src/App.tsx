@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { app, db } from "firebaseApp";
+import { app } from "firebaseApp";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +9,6 @@ import Loader from "components/Loader";
 // yarn create react-app blog-app --template typescript
 
 function App() {
-  console.log(db);
   const auth = getAuth(app); // getAuth는 app을 넣어줘야 동작 함
   // console.log(auth) 콘솔에 찍어보면 가장 중요한 currentUser가 null로 뜸 (아직 사용자가 로그인 되지 않았다라는 뜻)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(

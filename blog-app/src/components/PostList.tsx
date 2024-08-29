@@ -1,4 +1,7 @@
-import { useState } from "react";
+import AuthContext from "context/AuthContext";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "firebaseApp";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface PostListProps {
@@ -7,9 +10,34 @@ interface PostListProps {
 
 type TabType = "all" | "my";
 
+interface PostProps {
+  id: string;
+  title: string;
+  email: string;
+  summary: string;
+  content: string;
+  createdAt: string;
+}
+
 export default function PostList({ hasNavigation = true }: PostListProps) {
   // hasNavigation - list page 에서는 보여야 하고 profile page 에서는 보이면 안됨
   const [activeTab, setActiveTab] = useState<TabType>("all");
+  const [posts, setPosts] = useState<PostProps[]>([]);
+
+  const { user } = useContext(AuthContext);
+
+  const getPosts = async () => {
+    const datas = await getDocs(collection(db, "posts"));
+
+    datas?.forEach((doc) => {
+      const dataObj = { ...doc.data(), id: doc.id };
+      setPosts((prev) => [...prev, dataObj as PostProps]);
+    });
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
     <>
@@ -32,32 +60,31 @@ export default function PostList({ hasNavigation = true }: PostListProps) {
         </div>
       )}
       <div className="post__list">
-        {[...Array(10)].map((e, index) => (
-          <div key={index} className="post__box">
-            <Link to={`/posts/${index}`}>
-              <div className="post__profile-box">
-                <div className="post__profile" />
-                <div className="post__author-name">은동혁</div>
-                <div className="post__date">2024.07.18 목요일</div>
-              </div>
-              <div className="post__title">게시글 {index}</div>
-              <div className="post__text">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Tenetur reprehenderit at, consectetur quas fuga aut, molestias
-                saepe consequuntur eligendi ipsum et! Quis recusandae ipsum
-                dicta autem aspernatur in labore nobis?Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Blanditiis voluptas aliquid,
-                veritatis recusandae tempore voluptates hic optio, quaerat
-                libero laudantium aperiam magni possimus maiores perferendis
-                maxime facilis debitis odio ducimus?
-              </div>
-              <div className="post__utils-box">
-                <div className="post__delete">삭제</div>
-                <div className="post__edit">수정</div>
-              </div>
-            </Link>
-          </div>
-        ))}
+        {posts?.length > 0 ? (
+          posts?.map((post) => (
+            <div key={post?.id} className="post__box">
+              <Link to={`/posts/${post?.id}`}>
+                <div className="post__profile-box">
+                  <div className="post__profile" />
+                  <div className="post__author-name">{post?.email}</div>
+                  <div className="post__date">{post?.createdAt}</div>
+                </div>
+                <div className="post__title">{post?.title}</div>
+                <div className="post__text">{post?.content}</div>
+              </Link>
+              {post?.email === user?.email && (
+                <div className="post__utils-box">
+                  <div className="post__delete">삭제</div>
+                  <Link to={`/posts/edit/${post?.id}`} className="post__edit">
+                    수정
+                  </Link>
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <div className="post__no-post">게시글이 없습니다.</div>
+        )}
       </div>
     </>
   );

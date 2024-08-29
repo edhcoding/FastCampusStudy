@@ -33,5 +33,23 @@ export default function Study2() {
  * 보안규칙
  * https://firebase.google.com/docs/rules/get-started?hl=ko&authuser=0&_gl=1*s44exs*_ga*MTc5MTAyMzQwOS4xNzIyMTYzMzEz*_ga_CW55HF8NVT*MTcyNDA5MzQwMS4xMS4xLjE3MjQwOTM1MzkuNTEuMC4w
  * 
- * 
+ * addDoc
+ * - firestore로 데이터 생성 로직 작성 - setDoc은 문서마다 id값이 있을때 사용, addDoc은 문서마다 id값이 없을때 사용
+ * addDoc(collection(db, "posts"), {
+        title,
+        summary,
+        content,
+        createdAt: new Date()?.toLocaleDateString(),
+        email: user?.email,
+      })
+ */
+
+/**
+ * Firestore로 데이터 가져오기: 게시글 리스트 작업
+ *
+ * 컬렉션의 모든 문서 가져오기
+ * https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko&_gl=1*euw6lu*_up*MQ..*_ga*Mjg3NDEwMzExLjE3MjQ5NDU3MDQ.*_ga_CW55HF8NVT*MTcyNDk0NTcwNC4xLjAuMTcyNDk0NTcwNC4wLjAuMA..
+ *
+ * getDoc()
+ * getDoc(collection(db, "포스트 이름"))
  */

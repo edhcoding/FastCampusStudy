@@ -50,6 +50,34 @@ export default function Study2() {
  * 컬렉션의 모든 문서 가져오기
  * https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko&_gl=1*euw6lu*_up*MQ..*_ga*Mjg3NDEwMzExLjE3MjQ5NDU3MDQ.*_ga_CW55HF8NVT*MTcyNDk0NTcwNC4xLjAuMTcyNDk0NTcwNC4wLjAuMA..
  *
- * getDoc()
- * getDoc(collection(db, "포스트 이름"))
+ * getDocs(collection(db, "포스트 이름"))
+ * 
+ * 예시
+import { collection, query, where, getDocs } from "firebase/firestore";
+
+const q = query(collection(db, "cities"), where("capital", "==", true));
+
+const querySnapshot = await getDocs(q);
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  console.log(doc.id, " => ", doc.data());
+});
+ */
+
+/**
+ * 문서 가져오기
+ * https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko&_gl=1*euw6lu*_up*MQ..*_ga*Mjg3NDEwMzExLjE3MjQ5NDU3MDQ.*_ga_CW55HF8NVT*MTcyNDk0NTcwNC4xLjAuMTcyNDk0NTcwNC4wLjAuMA..#web-modular-api_8
+ * 
+ * 예시
+import { doc, getDoc } from "firebase/firestore";
+
+const docRef = doc(db, "컬레션 이름", "포스트 아이디");
+const docSnap = await getDoc(docRef);
+
+if (docSnap.exists()) {
+  console.log("Document data:", docSnap.data());
+} else {
+  // docSnap.data() will be undefined in this case
+  console.log("No such document!");
+}
  */

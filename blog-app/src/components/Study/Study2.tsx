@@ -82,7 +82,6 @@ if (docSnap.exists()) {
 }
  */
 
-
 /**
  * 게시판 UD 업데이트, 삭제 구현
  * 
@@ -92,12 +91,22 @@ if (docSnap.exists()) {
  * 예시
 import { doc, updateDoc } from "firebase/firestore";
 
-const washingtonRef = doc(db, "cities", "DC");
+const washingtonRef = doc(db, "cities", 아이디 값);
 
 // Set the "capital" field of the city 'DC'
 await updateDoc(washingtonRef, {
   capital: true
 });
+ */
 
+/**
+ * 게시글 삭제 구현
+ * 
+ * 문서 삭제
+ * https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=ko&_gl=1*8nsw1v*_up*MQ..*_ga*MjQwNDI5NjcyLjE3MjUwMTM0ODA.*_ga_CW55HF8NVT*MTcyNTAxMzQ4MC4xLjAuMTcyNTAxMzQ4MC4wLjAuMA..
+ * 
+ * 예시
+import { doc, deleteDoc } from "firebase/firestore";
 
+await deleteDoc(doc(db, "cities", 아이디 값));
  */

@@ -81,3 +81,23 @@ if (docSnap.exists()) {
   console.log("No such document!");
 }
  */
+
+
+/**
+ * 게시판 UD 업데이트, 삭제 구현
+ * 
+ * 문서 업데이트
+ * https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ko
+ * 
+ * 예시
+import { doc, updateDoc } from "firebase/firestore";
+
+const washingtonRef = doc(db, "cities", "DC");
+
+// Set the "capital" field of the city 'DC'
+await updateDoc(washingtonRef, {
+  capital: true
+});
+
+
+ */

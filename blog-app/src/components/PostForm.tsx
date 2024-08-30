@@ -1,14 +1,20 @@
 import AuthContext from "context/AuthContext";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { db } from "firebaseApp";
-import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { PostProps } from "./PostList";
+import { updateDoc } from "firebase/firestore";
 
+// PostForm 수정, 생성에서 둘 다 사용함으로 구분해줘야 함 - params에 id 가 있으면 수정, 없으면 생성
 export default function PostForm() {
   const [title, setTitle] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [post, setPost] = useState<PostProps | null>(null);
+
+  const params = useParams();
 
   const { user } = useContext(AuthContext);
 
@@ -18,18 +24,33 @@ export default function PostForm() {
     e.preventDefault();
 
     try {
-      // firestore로 데이터 생성 로직 작성 - setDoc은 문서마다 id값이 있을때 사용, addDoc은 문서마다 id값이 없을때 사용
-      await addDoc(collection(db, "posts"), {
-        title,
-        summary,
-        content,
-        createdAt: new Date()?.toLocaleDateString(),
-        email: user?.email,
-      });
+      if (post && post.id) {
+        // 만약 post 데이터가 있다면 firestore로 데이터 수정
+        const postRef = doc(db, "posts", post.id);
+        await updateDoc(postRef, {
+          title,
+          summary,
+          content,
+          updatedAt: new Date()?.toLocaleDateString(), // firebase는 no sql 이므로 동적으로 데이터 추가해도 상관없음
+        });
 
-      toast?.success("게시글을 생성했습니다.");
-      navigate("/");
+        toast?.success("게시글을 수정했습니다.");
+        navigate(`/posts/${post.id}`);
+      } else {
+        await addDoc(collection(db, "posts"), {
+          title,
+          summary,
+          content,
+          createdAt: new Date()?.toLocaleDateString(),
+          email: user?.email,
+          uid: user?.uid,
+        });
+
+        toast?.success("게시글을 생성했습니다.");
+        navigate("/");
+      }
     } catch (e: any) {
+      // firestore로 데이터 생성 로직 작성 - setDoc은 문서마다 id값이 있을때 사용, addDoc은 문서마다 id값이 없을때 사용
       console.log(e);
       toast?.error(e?.code);
     }
@@ -52,6 +73,26 @@ export default function PostForm() {
       setContent(value);
     }
   };
+
+  const getPost = async (id: string) => {
+    if (id) {
+      const docRef = doc(db, "posts", id);
+      const docSnap = await getDoc(docRef);
+      setPost({ id: docSnap.id, ...(docSnap.data() as PostProps) });
+    }
+  };
+
+  useEffect(() => {
+    if (params?.id) getPost(params?.id);
+  }, [params?.id]);
+
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title);
+      setSummary(post.summary);
+      setContent(post.content);
+    }
+  }, [post]);
 
   return (
     <form onSubmit={onSubmit} className="form">
@@ -88,7 +129,7 @@ export default function PostForm() {
         />
       </div>
       <div className="form__block">
-        <input type="submit" value="제출" className="form__btn--submit" />
+        <input type="submit" value={post ? "수정" : "제출"} className="form__btn--submit" />
       </div>
     </form>
   );

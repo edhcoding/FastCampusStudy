@@ -2,7 +2,7 @@ import AuthContext from "context/AuthContext";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { db } from "firebaseApp";
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface PostListProps {
@@ -26,8 +26,6 @@ export default function PostList({ hasNavigation = true }: PostListProps) {
   // hasNavigation - list page 에서는 보여야 하고 profile page 에서는 보이면 안됨
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const [posts, setPosts] = useState<PostProps[]>([]);
-
-  const navigate = useNavigate();
 
   const { user } = useContext(AuthContext);
 

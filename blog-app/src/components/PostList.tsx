@@ -76,16 +76,21 @@ export default function PostList({
         where("uid", "==", user.uid),
         orderBy("createdAt", "asc")
       );
-      console.log(postsQuery);
       // where는 기준을 정할 때 사용 ex) const q = query(citiesRef, where("population", ">", 100000), orderBy("population"), limit(2));
       // post의 uid가 내 uid랑 같으면 필터링
       // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       // 복합 쿼리를 사용했으므로 firebase에서 카테고리 인덱스를 추가해줘야함
       // 에러나옴 - The query requires an index.
-    } else {
+    } else if (activeTab === "all") {
       // 모든 글 보여주기
       postsQuery = query(postsRef, orderBy("createdAt", "asc")); // asc(ascending) - 오름차순, desc(descending) - 내림차순
-      console.log(postsQuery);
+    } else {
+      // 카테고리 글 보여주기
+      postsQuery = query(
+        postsRef,
+        where("category", "==", activeTab),
+        orderBy("createdAt", "asc")
+      );
     }
 
     const datas = await getDocs(postsQuery);
@@ -128,6 +133,18 @@ export default function PostList({
           >
             나의 글
           </div>
+          {CATEGORIES.map((category) => (
+            <div
+              key={category}
+              role="presentation"
+              onClick={() => setActiveTab(category)}
+              className={
+                activeTab === category ? "post__navigation--active" : ""
+              }
+            >
+              {category}
+            </div>
+          ))}
         </div>
       )}
       <div className="post__list">

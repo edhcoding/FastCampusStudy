@@ -148,5 +148,24 @@ firestore에서 복잡한 query를 사용하려면 색인을 반드시 생성해
     예시
     import { query, orderBy, limit } from "firebase/firestore";
     const q = query(citiesRef, orderBy("name"), limit(3));
-    
+
+ */
+
+/**
+ * Firestore 쿼리 적용하기 - 카테고리 탭 구현
+ * 
+ * 간단한 쿼리
+ * https://firebase.google.com/docs/firestore/query-data/queries?hl=ko&authuser=0&_gl=1*ycsqvc*_up*MQ..*_ga*MTc5MTAyMzQwOS4xNzIyMTYzMzEz*_ga_CW55HF8NVT*MTcyNTAzODAwOC4xOC4xLjE3MjUwMzg0NzEuNDIuMC4w
+ * 
+ * 예시
+ * // Create a reference to the cities collection
+import { collection, query, where } from "firebase/firestore";
+const citiesRef = collection(db, "cities");
+
+// Create a query against the collection.
+const q = query(citiesRef, where("state", "==", "CA"));
+
+복합 쿼리 사용 - 간단한 색인 추가
+https://firebase.google.com/docs/firestore/query-data/indexing?hl=ko
+
  */

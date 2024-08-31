@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { app } from "firebaseApp";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Router from "./components/Router";
 import Loader from "components/Loader";
+import { ThemeContext } from "context/ThemeContext";
 
 // yarn create react-app blog-app --template typescript
 
 function App() {
+  const context = useContext(ThemeContext);
+
   const auth = getAuth(app); // getAuth는 app을 넣어줘야 동작 함
   // console.log(auth) 콘솔에 찍어보면 가장 중요한 currentUser가 null로 뜸 (아직 사용자가 로그인 되지 않았다라는 뜻)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
@@ -30,10 +33,10 @@ function App() {
   }, [auth]);
 
   return (
-    <>
+    <div className={context.theme === "light" ? "white" : "dark"}>
       <ToastContainer />
       {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
-    </>
+    </div>
   );
 }
 

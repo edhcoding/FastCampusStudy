@@ -6,7 +6,7 @@ interface AuthProps {
   children: ReactNode;
 }
 
-const AuthContext = createContext({ user: null as User | null });
+const AuthContext = createContext({ user: null as User | null }); // ()소괄호 안에는 초깃값
 
 export const AuthContextProvider = ({ children }: AuthProps) => {
   const auth = getAuth(app);

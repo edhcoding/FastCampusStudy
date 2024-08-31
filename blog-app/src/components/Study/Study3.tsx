@@ -31,4 +31,5 @@ await updateDoc(washingtonRef, {
 배열 요소 업데이트 
 https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ko
 
+삭제는 arrayRemove()
  */

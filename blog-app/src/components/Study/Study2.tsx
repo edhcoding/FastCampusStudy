@@ -110,3 +110,43 @@ import { doc, deleteDoc } from "firebase/firestore";
 
 await deleteDoc(doc(db, "cities", 아이디 값));
  */
+
+/**
+ * Firestore 쿼리 적용하기 - 내가 쓴 글 탭 구현
+ * 
+ * 간단한 쿼리
+ * https://firebase.google.com/docs/firestore/query-data/queries?hl=ko
+ * 
+ * 예시
+// Create a reference to the cities collection
+import { collection, query, where } from "firebase/firestore";
+const citiesRef = collection(db, "cities");
+
+// Create a query against the collection.
+const q = query(citiesRef, where("state", "==", "CA"));
+
+- query와 where 함수를 사용해서 Ref를 통해 query와 where문을 적용할거임 - 유저의 uid가 로그인 된 내 uid와 같은지 where문을 통해서 내 글만 가져오도록 할거임
+
+색인
+https://firebase.google.com/docs/firestore/query-data/indexing?hl=ko
+
+firestore에서 복잡한 query를 사용하려면 색인을 반드시 생성해야함 - query 작업하면서 색인도 작업 해줘야함
+ */
+
+/**
+ * postlist 순서 이상하게 나오는거
+ * 1.
+ * new Date()?.toLocaleDateString("ko", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }
+    이렇게 변경
+    2. 데이터 정렬 및 제한
+    https://firebase.google.com/docs/firestore/query-data/order-limit-data?hl=ko&_gl=1*1tqehux*_up*MQ..*_ga*OTU0NjMzMjAzLjE3MjUwMTY0Mzg.*_ga_CW55HF8NVT*MTcyNTAxNjQzOC4xLjAuMTcyNTAxNjQzOC4wLjAuMA..
+    
+    예시
+    import { query, orderBy, limit } from "firebase/firestore";
+    const q = query(citiesRef, orderBy("name"), limit(3));
+    
+ */

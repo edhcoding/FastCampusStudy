@@ -31,7 +31,11 @@ export default function PostForm() {
           title,
           summary,
           content,
-          updatedAt: new Date()?.toLocaleDateString(), // firebase는 no sql 이므로 동적으로 데이터 추가해도 상관없음
+          updatedAt: new Date()?.toLocaleDateString("ko", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          }), // firebase는 no sql 이므로 동적으로 데이터 추가해도 상관없음
         });
 
         toast?.success("게시글을 수정했습니다.");
@@ -41,7 +45,11 @@ export default function PostForm() {
           title,
           summary,
           content,
-          createdAt: new Date()?.toLocaleDateString(),
+          createdAt: new Date()?.toLocaleDateString("ko", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          }),
           email: user?.email,
           uid: user?.uid,
         });
@@ -129,7 +137,11 @@ export default function PostForm() {
         />
       </div>
       <div className="form__block">
-        <input type="submit" value={post ? "수정" : "제출"} className="form__btn--submit" />
+        <input
+          type="submit"
+          value={post ? "수정" : "제출"}
+          className="form__btn--submit"
+        />
       </div>
     </form>
   );

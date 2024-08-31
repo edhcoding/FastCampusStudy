@@ -1,5 +1,13 @@
 import AuthContext from "context/AuthContext";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "firebaseApp";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,9 +15,15 @@ import { toast } from "react-toastify";
 
 interface PostListProps {
   hasNavigation?: boolean;
+  defaultTab?: TabType | CategoryType;
 }
 
-type TabType = "all" | "my";
+export interface CommentsInterface {
+  content: string;
+  uid: string;
+  email: string;
+  createdAt: string;
+}
 
 export interface PostProps {
   id?: string;
@@ -18,21 +32,63 @@ export interface PostProps {
   summary: string;
   content: string;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
   uid: string;
+  category?: CategoryType;
+  comments?: CommentsInterface[];
 }
 
-export default function PostList({ hasNavigation = true }: PostListProps) {
+type TabType = "all" | "my";
+
+export type CategoryType = "Frontend" | "Backend" | "Web" | "Native";
+export const CATEGORIES: CategoryType[] = [
+  "Frontend",
+  "Backend",
+  "Web",
+  "Native",
+];
+
+export default function PostList({
+  hasNavigation = true,
+  defaultTab = "all",
+}: PostListProps) {
   // hasNavigation - list page 에서는 보여야 하고 profile page 에서는 보이면 안됨
-  const [activeTab, setActiveTab] = useState<TabType>("all");
+  const [activeTab, setActiveTab] = useState<TabType | CategoryType>(
+    defaultTab
+  );
   const [posts, setPosts] = useState<PostProps[]>([]);
 
   const { user } = useContext(AuthContext);
 
   const getPosts = async () => {
-    const datas = await getDocs(collection(db, "posts"));
+    // const datas = await getDocs(collection(db, "posts"));
 
-    setPosts([]); // 삭제해도 계속 늘어나는 이유가 직므 자리에 빈 배열로 초기화를 안시켜줘서 그럼
+    setPosts([]); // 삭제해도 계속 늘어나는 이유가 삭제한 자리에 데이터가 남아있기에 빈 배열로 초기화를 안시켜줘서 그럼
+
+    // 데이터가 순서데로 안나와서 쿼리 데이터 정렬을 이용해 데이터 정렬함
+    let postsRef = collection(db, "posts");
+    let postsQuery;
+
+    if (activeTab === "my" && user) {
+      // 나의 글만 필터링
+      postsQuery = query(
+        postsRef,
+        where("uid", "==", user.uid),
+        orderBy("createdAt", "asc")
+      );
+      console.log(postsQuery);
+      // where는 기준을 정할 때 사용 ex) const q = query(citiesRef, where("population", ">", 100000), orderBy("population"), limit(2));
+      // post의 uid가 내 uid랑 같으면 필터링
+      // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      // 복합 쿼리를 사용했으므로 firebase에서 카테고리 인덱스를 추가해줘야함
+      // 에러나옴 - The query requires an index.
+    } else {
+      // 모든 글 보여주기
+      postsQuery = query(postsRef, orderBy("createdAt", "asc")); // asc(ascending) - 오름차순, desc(descending) - 내림차순
+      console.log(postsQuery);
+    }
+
+    const datas = await getDocs(postsQuery);
 
     datas?.forEach((doc) => {
       // forEach 배열 하나씩 돔
@@ -52,7 +108,7 @@ export default function PostList({ hasNavigation = true }: PostListProps) {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [activeTab]);
 
   return (
     <>
@@ -87,12 +143,12 @@ export default function PostList({ hasNavigation = true }: PostListProps) {
                 <div className="post__title">{post?.title}</div>
                 <div className="post__text">{post?.summary}</div>
               </Link>
-              {post?.email === user?.email && (
+              {post?.uid === user?.uid && (
                 <div className="post__utils-box">
                   <div
+                    className="post__delete"
                     role="presentation"
                     onClick={() => handleDelete(post.id as string)}
-                    className="post__delete"
                   >
                     삭제
                   </div>

@@ -100,3 +100,26 @@ service cloud.firestore {
  * 3. firebase login (로그인 후 테스트)
  * 4. firebase project:list (파이어베이스 프로젝트 확인)
  */
+
+/**
+ * firebase로 배포하기
+ * 
+ * 1. 우선 firebase cli로 초기화
+ * firebase init hosting
+ * 
+ * 2. command line에 아래와 같이 입력
+ * - Use an existing project
+ * - fastcampus-react-blog
+ * - What do you want to use as your public directory? => "build" 입력
+ * - Configure as a single-page app (rewrite all urls to /index.html) => yes
+ * - Set up automatic builds and deploys with GitHub? => yes
+ * 
+ * 3. 사이트 배포
+ * - yarn build (빌드 후 배포)
+ * - firebase deploy --only hosting
+ * - 배포된 url 확인 (https://XXX-XXX-XXX.web.app)
+ * 
+ * 4. Google console 및 Firebase 보안 적용
+ * - Firebase Auth > settings > 승인된 도메인 추가
+ * - Google console > API > 보안 URL 추가
+ */

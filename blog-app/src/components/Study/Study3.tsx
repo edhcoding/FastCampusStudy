@@ -33,3 +33,55 @@ https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ko
 
 삭제는 arrayRemove()
  */
+
+/**
+ * firebase 및 API 키 보안
+ *
+ * firebase 콘솔에서
+ * 1. firebase authorization 승인된 도메인 설정 - 지금은 기본 localhost 인데 나중에는 배포 사이트 주소로 변경해야함
+ * 2. firestore의 기본 보안규칙 (rules) 변경 - 지금은 기본 test로 해놔서 90일 동안 모든 사용자가 모든 요청 가능한데 모든 요청 가능하면 보안상 안좋으므로 수정해야 함
+ * 원래코드
+ * rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // This rule allows anyone with your Firestore database reference to view, edit,
+    // and delete all data in your Firestore database. It is useful for getting
+    // started, but it is configured to expire after 30 days because it
+    // leaves your app open to attackers. At that time, all client
+    // requests to your Firestore database will be denied.
+    //
+    // Make sure to write security rules for your app before that time, or else
+    // all client requests to your Firestore database will be denied until you Update
+    // your rules
+    match /{document=**} {
+      allow read, write: if request.time < timestamp.date(2024, 9, 18); // 모두 요청가능함
+    }
+  }
+}
+보안 규칙 사이트 
+https://firebase.google.com/docs/rules/get-started?hl=ko&authuser=0&_gl=1*qdahqi*_ga*MTc5MTAyMzQwOS4xNzIyMTYzMzEz*_ga_CW55HF8NVT*MTcyNTEwMzAwNC4yMi4xLjE3MjUxMDMzOTAuNy4wLjA.
+
+보안 규칙 작성 => 기본 보안 규칙 => 인증된 모든 사용자
+예시
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+ * 
+ * 3. google cloud 콘솔에 들어가서 api key 보안 작업 할거임
+ * - 1. 블로그 프로젝트 선택
+ * - 2. api keys => browser key 선택 => 애플리케이션 제한사항 설정 => 웹 사이트 => 승인된 url 추가
+ * - 3. test.com/* 형식으로 도메인 추가(localhost, firebase 도메인)
+ * 
+ * 
+ * 구글 클라우드 콘솔
+ * https://cloud.google.com/cloud-console/?utm_source=google&utm_medium=cpc&utm_campaign=japac-KR-all-ko-dr-BKWS-all-mv-trial-PHR-dr-1605216&utm_content=text-ad-none-none-DEV_c-CRE_631263160246-ADGP_Hybrid+%7C+BKWS+-+BRO+%7C+Txt+-Management+Tools-Cloud+Console-google+cloud+console-main-KWID_43700077715669141-kwd-296393718382&userloc_1030747-network_g&utm_term=KW_google+cloud+console&gad_source=1&gclid=Cj0KCQjw_sq2BhCUARIsAIVqmQtE84Sf3O4iRaGiiUrhpW8MHuHQXMhHbOJe_OJCoYyMhN0q7OIeGk4aAoEwEALw_wcB&gclsrc=aw.ds&hl=ko
+ * 
+ * key=API_KEY
+ * AIzaSyD5v_9zyxSC2e151F_LDovGmaTpmWQSJ0Y
+ */

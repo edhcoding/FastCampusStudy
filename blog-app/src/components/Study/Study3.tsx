@@ -85,3 +85,18 @@ service cloud.firestore {
  * key=API_KEY
  * AIzaSyD5v_9zyxSC2e151F_LDovGmaTpmWQSJ0Y
  */
+
+/**
+ * Firebase CLI 설명, 세팅
+ * https://firebase.google.com/docs/cli?authuser=0&_gl=1*1kbs2a2*_up*MQ..*_ga*MjM0NDQ1MTc5LjE3MjUxMTU4MzM.*_ga_CW55HF8NVT*MTcyNTExNTgzMy4xLjAuMTcyNTExNTgzOC4wLjAuMA..&hl=ko
+ * 
+ * Firebase CLI (Command Line Interface)
+ * - Firebase 프로젝트를 관리하고 다양한 Firebase 기능을 로컬에서 사용할 수 있게 해줌
+ * - Firebase 프로젝트 설정, 데이터 베이스, Cloud Function, 호스팅 등 관리
+ * 
+ * Firebase CLI 설치 방법
+ * 1. node.js 및 npm 설치 (사전에 작업됨)
+ * 2. npm install -g firebase-tools
+ * 3. firebase login (로그인 후 테스트)
+ * 4. firebase project:list (파이어베이스 프로젝트 확인)
+ */

@@ -64,7 +64,7 @@ const posts: PostProps[] = [
     uid: "123123",
   },
   {
-    id: "1",
+    id: "8",
     email: "mephisto7191@naver.com",
     content: "내용입니다.",
     createdAt: "2024-09-06",

@@ -1,3 +1,5 @@
+import LoginForm from "components/users/LoginForm";
+
 export default function LoginPage() {
-  return <div>fdsaf</div>;
+  return <LoginForm />;
 }

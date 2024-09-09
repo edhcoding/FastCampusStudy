@@ -269,7 +269,7 @@ body {
   }
 
   &__block--lg {
-    margin-top: 20px;
+    margin-top: 28px;
     width: 100%;
   }
 
@@ -316,5 +316,29 @@ body {
 
   &__error {
     color: red;
+  }
+
+  &__btn--google {
+    @extend .form__btn--submit;
+    background-color: white;
+    color: $activeBorder;
+
+    &:hover,
+    &:focus {
+      background-color: $primaryColor;
+      color: white;
+    }
+  }
+
+  &__btn--github {
+    @extend .form__btn--submit;
+    background-color: black;
+    color: white;
+
+    &:hover,
+    &:focus {
+      background-color: $activeBackground;
+      color: white;
+    }
   }
 }

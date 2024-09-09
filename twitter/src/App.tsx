@@ -27,7 +27,12 @@ function App() {
 
   return (
     <Layout>
-      <ToastContainer />
+      <ToastContainer
+        theme="dark"
+        autoClose={1000}
+        hideProgressBar // 프로그레스바 없애기
+        newestOnTop // 최신게 위로 올라가게하기
+      />
       {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
     </Layout>
   );

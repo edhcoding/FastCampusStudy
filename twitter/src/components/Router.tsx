@@ -24,7 +24,7 @@ export default function Router({ isAuthenticated }: RouterProps) {
           <Route path="/posts" element={<PostListPage />} />
           <Route path="/posts/:id" element={<PostDetail />} />
           <Route path="/posts/new" element={<PostNew />} />
-          <Route path="/posts/edit:id" element={<PostEdit />} />
+          <Route path="/posts/edit/:id" element={<PostEdit />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/notifications" element={<NotificationsPage />} />

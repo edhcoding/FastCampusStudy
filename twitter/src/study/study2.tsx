@@ -44,3 +44,24 @@ export default function Study2() {
  * - 하지만, OAuth를 직접 구현하고 관리하는 것은 복잡하고, 보안 이슈가 생길수도 있음
  * - Firebase의 Authentication은 복잡한 OAuth를 편리하게 구현할 수 있도록 도와줌
  */
+
+/**
+ * Firestore 실시간 업데이트
+ *
+ * 1) Firestore의 onSnapShot() 메서드로 문서를 리슨할 수 있음
+ * - 사용자가 제공하는 콜백이 최초로 호출될 때 단일 문서의 현재 콘텐츠로 문서 스냅샷이 즉시 생성됩니다.
+ *   그런 다음 콘텐츠가 변경될 때마다 콜백이 호출되어 문서 스냅샷을 업데이트합니다.
+ *
+ * 2) 즉, 데이터베이스 (Firestore)에 변화나 행위가 생겼을 때 실시간으로 알림을 받음
+ *
+ * 3) 우리가 원하는 특정 행위만 감지하도록 설정할 수 있음
+ *
+ *
+ *
+ * Firebase 실시간 업데이트: onSnapShot
+import { doc, onSnapshot } from "firebase/firestore";
+
+const unsub = onSnapshot(doc(db, "cities", "SF"), (doc) => {
+    console.log("Current data: ", doc.data());
+});
+ */

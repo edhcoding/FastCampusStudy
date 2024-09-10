@@ -69,7 +69,7 @@ export default function PostEditForm() {
     if (params.id) {
       getPost();
     }
-  }, [getPost]);
+  }, [params.id, getPost]);
 
   return (
     <form className="post-form" onSubmit={onSubmit}>

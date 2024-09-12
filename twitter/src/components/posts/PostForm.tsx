@@ -189,7 +189,7 @@ export default function PostForm() {
                 className="post-form__clear-btn"
                 onClick={handleDeleteImage}
               >
-                Clear
+                X
               </button>
             </div>
           )}

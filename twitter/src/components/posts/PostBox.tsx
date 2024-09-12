@@ -85,7 +85,7 @@ export default function PostBox({ post }: PostBoxProps) {
               Delete
             </button>
             <button type="button" className="post__edit">
-              <Link to={`posts/edit/${post?.id}`}>Edit</Link>
+              <Link to={`/posts/edit/${post?.id}`}>Edit</Link>
             </button>
           </>
         )}

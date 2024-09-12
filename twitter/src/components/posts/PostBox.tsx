@@ -1,6 +1,7 @@
 import AuthContext from "context/AuthContext";
 import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "firebaseApp";
+import { deleteObject, ref } from "firebase/storage";
+import { db, storage } from "firebaseApp";
 import { PostProps } from "pages/home";
 import { useContext } from "react";
 import { AiFillHeart } from "react-icons/ai";
@@ -17,7 +18,15 @@ export default function PostBox({ post }: PostBoxProps) {
 
   const navigate = useNavigate();
 
+  const imageRef = ref(storage, post?.imageUrl);
+
   const handleDelete = async () => {
+    // 스토리지 이미지 먼저 삭제 로직
+    // 파일 삭제 - https://firebase.google.com/docs/storage/web/delete-files?hl=ko&_gl=1*8ke4f7*_up*MQ..*_ga*MjA2MDI5MjYwOS4xNzI2MTI3ODQ4*_ga_CW55HF8NVT*MTcyNjEyNzg0Ny4xLjAuMTcyNjEyNzg0Ny4wLjAuMA..#delete_a_file
+    if (post?.imageUrl) {
+      deleteObject(imageRef).catch((e) => console.log(e));
+    }
+
     const confirm = window.confirm("해당 게시글을 삭제 하시겠습니까?");
 
     if (confirm) {

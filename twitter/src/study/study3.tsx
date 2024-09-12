@@ -146,3 +146,56 @@ getDownloadURL(ref(storage, 'images/stars.jpg'))
     // Handle any errors
   });
  */
+
+/**
+ * 이미지 업로드 구현
+ * Firebase storage로 업로드한 이미지 수정/삭제하기
+ * 
+ 파일의 다운로드 URL 가져오기 getDownloadURL()
+https://firebase.google.com/docs/storage/web/download-files?hl=ko&_gl=1*wup5og*_up*MQ..*_ga*NDU1MTE1Mjc5LjE3MjYwNDczNDA.*_ga_CW55HF8NVT*MTcyNjA0NzM0MC4xLjAuMTcyNjA0NzM0MC4wLjAuMA..#download_data_via_url
+
+ex)
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+const storage = getStorage();
+getDownloadURL(ref(storage, 'images/stars.jpg'))
+  .then((url) => {
+    // `url` is the download URL for 'images/stars.jpg'
+
+    // This can be downloaded directly:
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+
+    // Or inserted into an <img> element
+    const img = document.getElementById('myimg');
+    img.setAttribute('src', url);
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
+
+
+
+  파일 삭제하기 (deleteObject) - 게시글 삭제 한다고 사진이 삭제되지는 않음 (firestore, storage랑 별개임)
+  https://firebase.google.com/docs/storage/web/delete-files?hl=ko&_gl=1*8ke4f7*_up*MQ..*_ga*MjA2MDI5MjYwOS4xNzI2MTI3ODQ4*_ga_CW55HF8NVT*MTcyNjEyNzg0Ny4xLjAuMTcyNjEyNzg0Ny4wLjAuMA..#delete_a_file
+
+  ex)
+import { getStorage, ref, deleteObject } from "firebase/storage";
+
+const storage = getStorage();
+
+// Create a reference to the file to delete
+const desertRef = ref(storage, 'images/desert.jpg');
+
+// Delete the file
+deleteObject(desertRef).then(() => {
+  // File deleted successfully
+}).catch((error) => {
+  // Uh-oh, an error occurred!
+});
+ */

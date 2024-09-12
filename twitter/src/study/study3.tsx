@@ -51,8 +51,98 @@ const q = query(citiesRef,
  * - 삭제할 파일을 가르키는 참조 생성
  * - deleteObject() 메서드를 호출해 파일 삭제
  * (정상적으로 처리되면 Promise가 반환되고 Promise가 거부되면 오류가 반환)
- * 
+ *
  * 6) 파일 보안
  * - Firebase Authentication과 마찬가지로, 보안 규칙을 생성할 수 있음
  * - https://firebase.google.com/docs/storage/security 에서 더욱 다양한 규칙 확인가능
+ */
+
+/**
+ * 파일 업로드 (getStorage, ref)
+ * https://firebase.google.com/docs/storage/web/upload-files?hl=ko&_gl=1*hzt6sc*_up*MQ..*_ga*NDU1MTE1Mjc5LjE3MjYwNDczNDA.*_ga_CW55HF8NVT*MTcyNjA0NzM0MC4xLjAuMTcyNjA0NzM0MC4wLjAuMA..
+ * 
+ * ex)
+import { getStorage, ref } from "firebase/storage";
+
+// Create a root reference
+const storage = getStorage();
+
+// Create a reference to 'mountains.jpg'
+const mountainsRef = ref(storage, 'mountains.jpg');
+
+// Create a reference to 'images/mountains.jpg'
+const mountainImagesRef = ref(storage, 'images/mountains.jpg');
+
+// While the file names are the same, the references point to different files
+mountainsRef.name === mountainImagesRef.name;           // true
+mountainsRef.fullPath === mountainImagesRef.fullPath;   // false 
+
+
+
+
+
+문자열에서 업로드 uploadString() - base64, base64url 또는 data_url로 인코딩된 문자열을 Cloud Storage에 업로드할 수 있음
+https://firebase.google.com/docs/storage/web/upload-files?hl=ko&_gl=1*hzt6sc*_up*MQ..*_ga*NDU1MTE1Mjc5LjE3MjYwNDczNDA.*_ga_CW55HF8NVT*MTcyNjA0NzM0MC4xLjAuMTcyNjA0NzM0MC4wLjAuMA..
+
+ex)
+import { getStorage, ref, uploadString } from "firebase/storage";
+
+const storage = getStorage();
+const storageRef = ref(storage, 'some-child');
+
+// Raw string is the default if no format is provided
+const message = 'This is my message.';
+uploadString(storageRef, message).then((snapshot) => {
+  console.log('Uploaded a raw string!');
+});
+
+// Base64 formatted string
+const message2 = '5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+uploadString(storageRef, message2, 'base64').then((snapshot) => {
+  console.log('Uploaded a base64 string!');
+});
+
+// Base64url formatted string
+const message3 = '5b6p5Y-344GX44G-44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+uploadString(storageRef, message3, 'base64url').then((snapshot) => {
+  console.log('Uploaded a base64url string!');
+});
+
+// Data URL string
+const message4 = 'data:text/plain;base64,5b6p5Y+344GX44G+44GX44Gf77yB44GK44KB44Gn44Go44GG77yB';
+uploadString(storageRef, message4, 'data_url').then((snapshot) => {
+  console.log('Uploaded a data_url string!');
+});
+
+
+
+
+
+파일의 다운로드 URL 가져오기 getDownloadURL()
+https://firebase.google.com/docs/storage/web/download-files?hl=ko&_gl=1*wup5og*_up*MQ..*_ga*NDU1MTE1Mjc5LjE3MjYwNDczNDA.*_ga_CW55HF8NVT*MTcyNjA0NzM0MC4xLjAuMTcyNjA0NzM0MC4wLjAuMA..#download_data_via_url
+
+ex)
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+const storage = getStorage();
+getDownloadURL(ref(storage, 'images/stars.jpg'))
+  .then((url) => {
+    // `url` is the download URL for 'images/stars.jpg'
+
+    // This can be downloaded directly:
+    const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+
+    // Or inserted into an <img> element
+    const img = document.getElementById('myimg');
+    img.setAttribute('src', url);
+  })
+  .catch((error) => {
+    // Handle any errors
+  });
  */

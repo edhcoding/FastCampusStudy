@@ -38,6 +38,7 @@ export default function PostForm() {
 
     // 파일 읽기가 완료되었을 때 실행되는 이벤트 핸들러
     fileReader.onloadend = (e: any) => {
+      // onload VS onloadend 차이는 onload는 성공할때만 실행, onloadend는 실패, 성공 상관없이 실행
       // console.log(e); => 이런 이벤트가 나옴 ProgressEvent {isTrusted: true, lengthComputable: true, loaded: 138124, total: 138124, type: 'loadend', …}
       // 여기서 currentTarget에서 result에 인코딩 된 데이터값이 들어있음
       const { result } = e?.currentTarget;
@@ -56,10 +57,11 @@ export default function PostForm() {
       let imageUrl = "";
       if (imageFile) {
         const data = await uploadString(storageRef, imageFile, "data_url");
-        imageUrl = await getDownloadURL(data?.ref);
+        imageUrl = await getDownloadURL(data?.ref); // https://firebase.google.com/docs/storage/web/download-files?hl=ko&_gl=1*mfmr8w*_up*MQ..*_ga*MjA2MDI5MjYwOS4xNzI2MTI3ODQ4*_ga_CW55HF8NVT*MTcyNjEyNzg0Ny4xLjAuMTcyNjEyNzg0Ny4wLjAuMA..
+        // URL을 통해 데이터 다운로드 getDownloadURL - 단순히 url을 공유하려는 경우 스토리지 참조에 getDownloadURL() 메서드를 호출하여 파일의 다운로드 URL을 가져올 수 있음
       }
-      // 업로드된 이미지 download url 업데이트
 
+      // 업로드된 이미지 download url 업데이트
       await addDoc(collection(db, "posts"), {
         // addDoc(collection(db , 컬렉션 이름), {데이터 내용})
         content,

@@ -44,8 +44,8 @@ export default function HomePage() {
       <div className="home__top">
         <div className="home__title">Home</div>
         <div className="home__tabs">
-          <div className="home__tab home__tab--active">For You</div>
-          <div className="home__tab">Following</div>
+          <div className="home__tab home__tab--active">전체(For You)</div>
+          <div className="home__tab">팔로잉(Following)</div>
         </div>
       </div>
       <PostForm />

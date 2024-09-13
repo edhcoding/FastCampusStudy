@@ -64,8 +64,8 @@ export default function ProfilePage() {
         <div className="profile__email">{user?.email || "사용자 님"}</div>
       </div>
       <div className="home__tabs">
-        <div className="home__tab home__tab--active">For You</div>
-        <div className="home__tab">Likes</div>
+        <div className="home__tab home__tab--active">내가쓴 글(For You)</div>
+        <div className="home__tab">좋아요(Likes)</div>
       </div>
       <div className="post">
         {posts?.length > 0 ? (

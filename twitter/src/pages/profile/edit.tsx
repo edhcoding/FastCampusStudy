@@ -59,14 +59,13 @@ export default function ProfileEdit() {
     e.preventDefault();
 
     try {
-      // 기존 이미지 선택
-      // if (user?.photoURL) {
-      //   const imageRef = ref(storage, user.photoURL);
-      //   console.log(imageRef);
-      //   if (imageRef) {
-      //     await deleteObject(imageRef).catch((e) => console.log(e));
-      //   }
-      // }
+      // 기존 유저 이미지가 Fireabase storage 이미지일 경우에만 선택, 삭제 - firebase database를 보면 https://firebasestorage.googleapis.com 해당 값이 있는 url은 삭제가 되고 해당 값이 없는 url은 삭제가 안되는 현상이있음
+      if (user?.photoURL && user?.photoURL.includes(STORAGE_DOWNLOAD_URL_STR)) {
+        const imageRef = ref(storage, user.photoURL);
+        if (imageRef) {
+          await deleteObject(imageRef).catch((e) => console.log(e));
+        }
+      }
       // 이미지 업로드
       if (imageUrl) {
         const data = await uploadString(storageRef, imageUrl, "data_url");
@@ -85,37 +84,6 @@ export default function ProfileEdit() {
           .catch((e) => console.log(e));
       }
     } catch (e) {}
-
-    // try {
-    //   // 기존 유저 이미지가 Firebase Storage 이미지일 경우에만 삭제
-    //   if (
-    //     user?.photoURL &&
-    //     user?.photoURL?.includes(STORAGE_DOWNLOAD_URL_STR)
-    //   ) {
-    //     const imageRef = ref(storage, user?.photoURL);
-    //     if (imageRef) {
-    //       await deleteObject(imageRef).catch((error) => {
-    //         console.log(error);
-    //       });
-    //     }
-    //   }
-    //   // updateProfile 호출
-    //   if (user) {
-    //     await updateProfile(user, {
-    //       displayName: displayName || "",
-    //       photoURL: newImageUrl || "",
-    //     })
-    //       .then(() => {
-    //         toast.success("프로필이 업데이트 되었습니다.");
-    //         navigate("/profile");
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   }
-    // } catch (e: any) {
-    //   console.log(e);
-    // }
   };
 
   useEffect(() => {

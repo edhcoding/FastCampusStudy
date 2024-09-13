@@ -53,7 +53,7 @@ export default function ProfilePage() {
         />
         <button
           type="button"
-          className="profile_btn"
+          className="profile__btn"
           onClick={() => navigate("/profile/edit")}
         >
           프로필 수정

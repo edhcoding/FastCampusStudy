@@ -199,3 +199,21 @@ deleteObject(desertRef).then(() => {
   // Uh-oh, an error occurred!
 });
  */
+
+/**
+ * 프로필 이미지 업로드 기능 구현 - https://firebase.google.com/docs/auth/web/manage-users?hl=ko
+ * updateProfile 메서드 사용하기
+ * 
+ * ex)
+import { getAuth, updateProfile } from "firebase/auth";
+const auth = getAuth();
+updateProfile(auth.currentUser, {
+  displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+}).then(() => {
+  // Profile updated!
+  // ...
+}).catch((error) => {
+  // An error occurred
+  // ...
+});
+ */

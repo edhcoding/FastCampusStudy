@@ -28,23 +28,23 @@ body {
 }
 
 .layout {
-  max-width: 600px;
   margin: 0 auto;
-  position: relative;
-  border-left: 1px solid $border;
   border-right: 1px solid $border;
+  border-left: 1px solid $border;
+  position: relative;
+  max-width: 600px;
   min-height: 100vh;
 }
 
 .button {
   padding: 0.2rem 0.8rem;
-  border-radius: 999px;
-  font-size: 12px;
-  line-height: 1.25rem;
-  font-weight: 600;
   border: none;
-  cursor: pointer;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25rem;
+  cursor: pointer;
+  border-radius: 999px;
 
   &:disabled {
     opacity: 0.5;
@@ -57,41 +57,41 @@ body {
 }
 
 .sticky {
-  width: 100%;
-  position: sticky;
-  max-width: 600px;
   margin: 0 auto;
+  position: sticky;
   top: 0;
+  width: 100%;
+  max-width: 600px;
 }
 
 // Footer 레이아웃
 .footer {
+  margin: 0 auto;
   position: fixed;
   right: 0;
-  left: 0;
   bottom: 0;
+  left: 0;
   z-index: 10;
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
   background-color: transparent;
   color: $white;
 
   &__grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     background-color: transparent;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 
     button {
-      cursor: pointer;
-      border: none;
       display: flex;
       gap: 8px;
-      justify-content: center;
       align-items: center;
-      font-size: 15px;
-      background-color: transparent;
+      justify-content: center;
       padding: 16px 0px;
+      border: none;
+      background-color: transparent;
+      font-size: 15px;
+      cursor: pointer;
       backdrop-filter: blur(10px);
     }
   }
@@ -106,12 +106,12 @@ body {
 
   &__search {
     @extend .post-form__input;
-    background-color: $backgroundLight;
-    border-radius: 20px;
     margin-bottom: 20px;
     padding: 12px !important;
     width: 90% !important;
+    background-color: $backgroundLight;
     font-size: 16px;
+    border-radius: 20px;
 
     &:focus {
       border: 1px solid $primaryColor;
@@ -125,29 +125,29 @@ body {
   }
 
   &__title {
-    background-color: transparent;
-    width: 90% !important;
     padding: 16px;
-    font-weight: 700;
+    width: 90% !important;
+    background-color: transparent;
     font-size: 20px;
+    font-weight: 700;
   }
 
   &__tabs {
-    background-color: transparent;
-    width: 100%;
     display: grid;
+    width: 100%;
+    background-color: transparent;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   &__tab {
-    background-color: transparent;
-    text-align: center;
-    font-weight: 500;
     padding: 16px;
+    background-color: transparent;
+    font-weight: 500;
+    text-align: center;
 
     &--active {
-      font-weight: 700;
       border-bottom: 2px solid $activeBorder;
+      font-weight: 700;
     }
 
     &:hover,
@@ -162,11 +162,11 @@ body {
     padding: 16px;
 
     .post-form__input {
-      border-bottom: 1px solid $gray;
-      padding: 8px 2px;
-      font-size: 16px;
-      width: 100%;
       margin-bottom: 20px;
+      padding: 8px 2px;
+      border-bottom: 1px solid $gray;
+      width: 100%;
+      font-size: 16px;
 
       &:active,
       &:focus {
@@ -177,14 +177,14 @@ body {
 
   &__image-area {
     display: flex;
-    align-items: center;
     gap: 8px;
+    align-items: center;
   }
 
   &__attachment {
     display: flex;
-    align-items: end;
     gap: 16px;
+    align-items: end;
   }
 
   &__clear-btn {
@@ -199,13 +199,13 @@ body {
   }
 
   &__input {
-    font-family: "Jua";
+    margin-top: 8px;
     padding: 8px;
     border: none;
-    resize: none;
     outline: none;
-    margin-top: 8px;
     width: calc(100% - 32px);
+    font-family: "Jua";
+    resize: none;
   }
 
   &__hashtags {
@@ -214,59 +214,59 @@ body {
 
     &-outputs {
       display: flex;
-      flex-wrap: wrap;
       gap: 8px 1px;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     &-tag {
-      font-size: 14px;
-      border: 1px solid $primaryColor;
-      color: $primaryColor;
-      border-radius: 10px;
-      padding: 2px 8px;
       margin-right: 6px;
+      padding: 2px 8px;
+      border: 1px solid $primaryColor;
+      font-size: 14px;
+      color: $primaryColor;
       cursor: pointer;
+      border-radius: 10px;
 
       &:hover,
       &:focus {
-        color: $activeBorder;
         border: 1px solid $activeBorder;
+        color: $activeBorder;
       }
     }
   }
 
   &__textarea {
-    font-family: $font;
-    min-height: 120px;
     display: block;
-    width: calc(100% - 32px);
     padding: 16px;
     border: none;
-    resize: none;
-    outline: none;
-    font-size: 15px;
     border-bottom: 1px solid $border;
+    outline: none;
+    width: calc(100% - 32px);
+    min-height: 120px;
+    font-family: $font;
+    font-size: 15px;
+    resize: none;
 
     &::placeholder {
       font-family: $font;
-      color: $grayText;
       font-size: 15px;
+      color: $grayText;
     }
   }
 
   &__submit-area {
     display: flex;
-    padding: 0.75rem 1rem;
-    justify-content: space-between;
-    border-bottom: 1px solid $border;
     align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid $border;
 
     .post-form__file {
       display: flex;
-      padding: 0 1rem;
-      flex-direction: column;
       justify-content: center;
+      flex-direction: column;
+      padding: 0 1rem;
       cursor: pointer;
     }
 
@@ -290,8 +290,8 @@ body {
 
   &__header {
     button {
-      border: none;
       padding: 16px;
+      border: none;
     }
 
     &-btn {
@@ -305,9 +305,9 @@ body {
     padding: 16px;
 
     .post__text {
-      font-size: 14px;
-      border: 1px solid $gray;
       padding: 16px;
+      border: 1px solid $gray;
+      font-size: 14px;
       border-radius: 4px;
     }
   }
@@ -336,31 +336,31 @@ body {
     }
 
     &-profile {
-      text-decoration: none;
       padding: 0 10px;
+      text-decoration: none;
 
       &-img,
       &-icon {
+        margin-right: 10px;
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        margin-right: 10px;
       }
     }
 
     &-content {
       display: block;
-      font-weight: 500;
       padding: 16px 4px;
+      font-weight: 500;
     }
 
     &-footer {
-      padding: 0 16px;
-      margin-top: 10px;
-      font-size: 14px;
       display: flex;
       gap: 8px;
       flex-direction: row-reverse;
+      margin-top: 10px;
+      padding: 0 16px;
+      font-size: 14px;
 
       button {
         @extend .button;
@@ -404,17 +404,17 @@ body {
 // form 레이아웃
 .form {
   margin: 0 auto;
-  max-width: 680px;
   padding: 20px;
+  max-width: 680px;
 
   input {
-    height: 20px;
     padding: 10px;
-    border-radius: 0.3rem;
     // border: 1px solid lightgray
     // outline: none;
     width: 96%;
     max-width: 680px;
+    height: 20px;
+    border-radius: 0.3rem;
   }
 
   &__block {
@@ -429,21 +429,21 @@ body {
 
   label {
     display: block;
-    margin-bottom: 10px;
     margin-top: 20px;
+    margin-bottom: 10px;
   }
 
   &__btn--submit {
     @extend .button;
+    margin: 0 auto;
+    padding: 10px;
     width: 100%;
     height: 48px;
-    font-family: "Jua";
-    padding: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 0 auto;
-    color: white;
     background-color: $primaryColor;
+    font-family: "Jua";
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -452,15 +452,15 @@ body {
   }
 
   &__title {
-    text-align: center;
-    font-size: 24px;
     padding-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
   }
 
   &__link {
     margin-left: 10px;
-    text-decoration: none;
     color: $grayText;
+    text-decoration: none;
 
     &:hover,
     &:focus {
@@ -500,15 +500,15 @@ body {
 // Profile 레이아웃
 .profile {
   display: flex;
-  padding: 0 1rem;
-  margin-top: 2.5rem;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding: 0 1rem;
 
   &__image {
-    border-radius: 50%;
     width: 100px;
     height: 100px;
+    border-radius: 50%;
   }
 
   &__btn {
@@ -522,19 +522,19 @@ body {
   }
 
   &__text {
-    padding: 0 1rem;
     margin-top: 20px;
+    padding: 0 1rem;
   }
 
   &__name {
+    margin-bottom: 4px;
     font-size: 16px;
     color: white;
-    margin-bottom: 4px;
   }
 
   &__email {
+    margin-bottom: 4px;
     font-size: 14px;
     color: $grayText;
-    margin-bottom: 4px;
   }
 }

@@ -54,7 +54,9 @@ export default function CommentBox({ data, post }: CommentBoxProps) {
               type="button"
               className="comment__delete-btn"
               onClick={handleDeleteComment}
-            >삭제</button>
+            >
+              삭제
+            </button>
           )}
         </div>
       </div>

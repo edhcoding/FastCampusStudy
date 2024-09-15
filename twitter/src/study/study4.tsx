@@ -53,3 +53,10 @@ await updateDoc(washingtonRef, {
 
 정렬할 때 array-contains 연산자 사용
  */
+
+/**
+ * 댓글 기능 구현 (좋아요 기능 구현할 때 사용한 메서드 사용)
+ *
+ * 댓글 생성시: updateDoc, arrayUnion 사용
+ * 댓글 삭제시: updateDoc, arrayRemove 사용
+ */

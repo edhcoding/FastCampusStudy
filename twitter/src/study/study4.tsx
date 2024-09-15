@@ -63,6 +63,12 @@ await updateDoc(washingtonRef, {
 
 /**
  * 팔로우/팔로잉 기능 구현 (follewer, following)
+ * https://firebase.google.com/docs/firestore/manage-data/add-data?hl=ko#add_a_document
+ * setDoc() - updateDoc()이 아닌 setDoc() 사용 (단일 문서를 만들거나 덮어쓸 때 사용 - 문서가 없으면 생성, 있으면 덮어써 기존 문서 업데이트)
+ * import { doc, setDoc } from "firebase/firestore"; 
+
+const cityRef = doc(db, 'cities', 'BJ');
+setDoc(cityRef, { capital: true }, { merge: true });
  *
  * 데이터 구조 잡는 방법 2가지
  * 1. 팔로잉/팔로워 목록을 사용자 문서에 배열로 저장 (배열에 각각 유저 아이디를 저장 - 앱이 커지거나 확장하기에는 어려운 데이터 구조임)
@@ -87,4 +93,8 @@ await updateDoc(washingtonRef, {
  *
  * 팔로우시: updateDoc, arrayUnion 사용
  * 팔로우 취소시: updateDoc, arrayRemove 사용
+ * 
+ * 
+ * 
+ * 
  */

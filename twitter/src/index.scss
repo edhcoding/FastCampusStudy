@@ -318,6 +318,34 @@ body {
     display: flex;
     gap: 4px;
     align-items: center;
+
+    &--between {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  &__follow-btn {
+    @extend .button;
+    background-color: $activeBorder;
+    color: white;
+
+    &:hover,
+    &:focus {
+      background-color: $primaryColor;
+    }
+  }
+
+  &__following-btn {
+    @extend .button;
+    background-color: $primaryColor;
+    color: white;
+
+    &:hover,
+    &:focus {
+      background-color: $activeBorder;
+    }
   }
 
   &__email,

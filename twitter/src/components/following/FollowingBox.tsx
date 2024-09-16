@@ -39,6 +39,8 @@ export default function FollowingBox({ post }: FollowingProps) {
             users: arrayUnion({ id: post?.uid }),
           },
           { merge: true }
+          // merge - 만약에 지정한 아이디를 가진 문서가 이미 존재한다면, 해당 문서를 덮어쓴다.
+          // 기존의 필드를 덮어 씌우지 않기 위해선 merge: true 옵션을 지정해주면 된다
         );
         // 팔로우 당하는 사람이 주체가 되어 "팔로우" 컬렉션 생성 or 업데이트
         const followerRef = doc(db, "follower", post?.uid);
@@ -86,13 +88,14 @@ export default function FollowingBox({ post }: FollowingProps) {
 
       onSnapshot(ref, (doc) => {
         setPostFollwers([]);
-        doc
-          ?.data()
-          ?.users?.map((user: UserProps) =>
+        doc?.data()?.users?.map(
+          (
+            user: UserProps // UserProps => id: string에서 id를 가리키는게 아니라 id: user?.uid로 위에 지정해서 id => uid 가리키는 값임
+          ) =>
             setPostFollwers((prev: UserProps[]) =>
               prev ? [...prev, user?.id] : []
             )
-          );
+        );
       });
     }
   }, [post.uid]);

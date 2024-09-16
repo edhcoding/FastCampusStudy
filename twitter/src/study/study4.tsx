@@ -129,3 +129,25 @@ setDoc(cityRef, { capital: true }, { merge: true });
  * 3) 데이터 삭제 (deleteDoc VS updateDoc, deleteField)
  * 도큐먼트를 한번에 삭제하고 싶다면 deleteDoc를 사용하면 되고, 특정 필드만 지우고 싶다면 deleteField와 updateDoc를 사용할 수 있습니다.
  */
+
+/**
+ * 알림 기능 구현
+ * 알림 기능이란 - 다른 사용자가 내 게시물에 글을 남겼거나 나를 팔로우 했을때 나의 알림에 나오도록 하는 것
+ *
+ * 설계하기
+ * 언제 알림을 생성할까?
+ * 1. 특정 사용자를 "팔로우" 했을 때
+ * 2. 특정 사용자의 글에 "댓글"을 남겼을 때
+ *
+ * 어떤 방식으로 알림을 보여줘야 할까?
+ * 1. 리스트 형식으로 사용자의 알림만 모아서 보여주기
+ * 2. 만약 "댓글"을 남긴 알림이라면, 눌렀을 때 해당 게시글로 이동하게 하기
+ * 3. 확인한 알림과 그렇지 않은 알림 구분하기
+ *
+ * Notifications Collection 만들꺼임
+ * UserID => content, createdAt, isRead, uid, url (isRead - boolean, 나머지 다 string)
+ * content - 알림내용. 팔로잉 했을 때와 댓글을 남겼을 때 두 가지 내용이 있음
+ * isRead - 해당 알림을 읽었는지 아닌지 표시 기본값 false
+ * uid - 해당 알림 사용자 id
+ * url - 알림 눌렀을 때 이동하는 url
+ */

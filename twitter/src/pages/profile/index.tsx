@@ -86,7 +86,7 @@ export default function ProfilePage() {
           className={`home__tab ${activeTab === "my" && "home__tab--active"}`}
           onClick={() => setActiveTab("my")}
         >
-          내가쓴 글(For You)
+          내가쓴 글(My Post)
         </div>
         <div
           className={`home__tab ${activeTab === "like" && "home__tab--active"}`}

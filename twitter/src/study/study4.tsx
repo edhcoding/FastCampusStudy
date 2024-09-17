@@ -100,37 +100,6 @@ setDoc(cityRef, { capital: true }, { merge: true });
  */
 
 /**
- * 오해할만한 메서드
- *
- * 1) 데이터 생성 (setDoc VS addDoc)
- * 데이터는 setDoc과 addDoc으로 추가해 줄 수 있습니다.
- * 두 함수의 차이점은, setDoc의 경우 ID를 직접 지정할 수 있으나, addDoc은 아이디가 자동으로 생성 된다는 것입니다.
- * 두 함수 사용하는 형식은 거의 동일합니다. 함수(콜렉션, 데이터) 방식으로 호출하면 된다.
- *
- * // 데이터 id 지정해서 추가
- * await setDoc(doc(db, "cities", "new-city-id"), data);
- *
- * // 데이터 추가 (id는 자동 생성됨)
- * const docRef = await addDoc(collection(db, "cities"), {
- *  name: "Tokyo",
- *  country: "Japan"
- * });
- *
- *
- * 2) 데이터 수정 (setDoc VS updateDoc)
- * setDoc - 단일 문서를 만들거나 덮어쓰려면 set() 메서드를 사용합니다.
- * updateDoc - 전체 문서를 덮어쓰지 않고 문서의 일부 필드를 업데이트하려면 update() 메서드를 사용합니다.
- *
- * 두 함수의 차이점은, updateDoc의 경우 특정 필드만 수정 할 수 있고, setDoc은 지정한 데이터를 통째로 변경해버립니다.(지정한 데이터가 없다면 추가함)
- * updateDoc으로 전체 문서를 덮어쓰지 않고 문서의 일부 필드를 업데이트 할 수 있습니다.
- * setDoc으로 문서를 일괄 업데이트 할 수 있습니다.
- *
- *
- * 3) 데이터 삭제 (deleteDoc VS updateDoc, deleteField)
- * 도큐먼트를 한번에 삭제하고 싶다면 deleteDoc를 사용하면 되고, 특정 필드만 지우고 싶다면 deleteField와 updateDoc를 사용할 수 있습니다.
- */
-
-/**
  * 알림 기능 구현
  * 알림 기능이란 - 다른 사용자가 내 게시물에 글을 남겼거나 나를 팔로우 했을때 나의 알림에 나오도록 하는 것
  *

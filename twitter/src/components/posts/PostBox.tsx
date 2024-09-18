@@ -1,4 +1,5 @@
 import FollowingBox from "components/following/FollowingBox";
+import useTranslation from "components/hooks/useTranslation";
 import AuthContext from "context/AuthContext";
 import {
   arrayRemove,
@@ -24,6 +25,8 @@ export default function PostBox({ post }: PostBoxProps) {
   const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const t = useTranslation();
 
   const imageRef = ref(storage, post?.imageUrl);
 
@@ -112,10 +115,10 @@ export default function PostBox({ post }: PostBoxProps) {
               className="post__delete"
               onClick={handleDelete}
             >
-              Delete
+              {t("BUTTON_DELETE")}
             </button>
             <button type="button" className="post__edit">
-              <Link to={`/posts/edit/${post?.id}`}>Edit</Link>
+              <Link to={`/posts/edit/${post?.id}`}>{t("BUTTON_EDIT")}</Link>
             </button>
           </>
         )}

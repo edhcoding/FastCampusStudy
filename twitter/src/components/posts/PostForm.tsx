@@ -1,3 +1,4 @@
+import useTranslation from "components/hooks/useTranslation";
 import AuthContext from "context/AuthContext";
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
@@ -15,6 +16,8 @@ export default function PostForm() {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const { user } = useContext(AuthContext);
+
+  const t = useTranslation();
 
   const handleFileUpload = (e: any) => {
     const {
@@ -141,7 +144,7 @@ export default function PostForm() {
         className="post-form__textarea"
         name="content"
         id="content"
-        placeholder="오늘하루 무슨일이 있었나요? (필수 입력)"
+        placeholder={t("POST_PLACEHOLDER")}
         value={content}
         onChange={onChange}
         required
@@ -162,7 +165,7 @@ export default function PostForm() {
           className="post-form__input"
           name="hashtag"
           id="hashtag"
-          placeholder="해시태그 입력"
+          placeholder={t("POST_HASHTAG")}
           onChange={onChangeHashTag}
           onKeyUp={handleKeyUp}
           value={hashTag}
@@ -189,7 +192,7 @@ export default function PostForm() {
                 className="post-form__clear-btn"
                 onClick={handleDeleteImage}
               >
-                X
+                {t("BUTTON_DELETE")}
               </button>
             </div>
           )}

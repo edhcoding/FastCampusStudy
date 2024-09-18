@@ -1,18 +1,4 @@
-$background: #212224;
-$activeBackground: #3f4145;
-$white: #ffffff;
-$backgroundLight: #2e3235;
-$border: #708090;
-$primaryColor: #60a5fa;
-$activeBorder: #3b82f6;
-$grayText: #9ca3af;
-$danger: #dc2626;
-$dangerDark: #dc26268e;
-$gray: #6b7280;
-$grayDark: #4c515b;
-
-$font: "Jua", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+@import "./utils.scss";
 
 // 전체 레이아웃
 body {
@@ -82,6 +68,10 @@ body {
     background-color: transparent;
     grid-template-columns: repeat(5, minmax(0, 1fr));
 
+    &--text {
+      background-color: transparent;
+    }
+
     button {
       display: flex;
       gap: 8px;
@@ -99,6 +89,50 @@ body {
         backdrop-filter: blur(10px);
       }
     }
+  }
+}
+
+@include xsMobile {
+  .footer {
+    display: none;
+  }
+
+  .layout {
+    border: none;
+  }
+}
+
+@include mobile {
+  .footer {
+    &__grid {
+      &--text {
+        display: none;
+      }
+      button {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .layout {
+    border: none;
+  }
+}
+
+@include tablet {
+  .footer {
+    &__grid {
+      &--text {
+        display: none;
+      }
+      button {
+        font-size: 24px;
+      }
+    }
+  }
+
+  .layout {
+    border: none;
   }
 }
 

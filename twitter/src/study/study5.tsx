@@ -197,3 +197,43 @@ export default function Study5() {
  * - Github/GitLab 연동 배포: Github, GitLab과 Vercel를 연동하여 저장소에 변경사항이 푸시될 때 마다 자동으로 배포
  * - 환경 변수 설정: Vercel 대시보드나 CLI를 통해 환경변수 설정
  */
+
+/**
+ * Vercel CLI로 배포
+ *
+ * Vercel CLI: 프로젝트를 로컬 환경에서 배포하기 위한 커맨드 라인 도구
+ * Vercel CLI를 사용하면 프로젝트를 효율적으로 관리할 수 있음
+ *
+ * 사용법
+ * 1) Vercel CLI 설치
+ * - npm install -g vercel
+ * - yarn global add vercel
+ * - 잘 설치되었는지 확인법: vercel --version
+ * 2. Vercel 로그인
+ * - vercel login
+ * 3) 프로젝트 배포
+ * - vercel
+ * 4) 프로젝트 삭제
+ * - vercel remove
+ *
+ *
+ *
+ *
+ * Vercel 명령어 입력 후 작업
+ * - Set up and deploy"~react-twitter"? [Y/n] => Y
+ * - Link to existing project? [y/N] => N - 기존 프로젝트인지 우린 새로운 프로젝트이므로 N
+ * - What's your project's name? (react-twitter) - 프로젝트 이름
+ * - In whitch directory is your code located? ./ - directory는 ./ 루트 디렉토리
+ * - Auto detected Project Settings (Created React App)
+ *     - 기본 설정 적용, Output Directory: build
+ * - Want to modify these settings? [y/N]
+ *     - Linked to 깃헙레포/react-twitter ~~
+ *     - 빌드 완료
+ * 
+ * 
+ * 
+ * 
+ * Vercel 사이트에서 환경변수 입력
+ * - project > settings > environment variables
+ * - 환경 변수 설정 후 다시 배포, firebase 및 google api에 생성된 url 입력
+ */

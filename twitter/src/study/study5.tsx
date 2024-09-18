@@ -140,8 +140,18 @@ export default function Study5() {
  * 1) 다양한 환경에서 일관된 사용자 경험 제공 / 다양한 장치 및 화면 크기 대응
  * 2) SEO에 최적화되어 유리한 결과를 가져올 수 있음
  * 3) 향상된 성능과 속도 제공
- * 
+ *
  * - 단점:
  * 1) 디자인 및 스타일 유지 관리 어려울 수도 있음
  * 2) 개발 시간 및 비용 증가
+ */
+
+/**
+ * firebase 및 api 키 보안 작업
+ * 1. firebase authentication 승인된 도메인 설정 - (보안을 위해 전화 인증, Google 인증, 타사 인증을 사용하려면 도메인에서 OAuth 리디렉션을 승인받아야 합니다.)
+ * 2. firestore 및 storage의 기본 보안규칙 (rules) 변경
+ * 3. https://console.cloud.google.com/apis/credentials 에서 api key 보안 작업
+ *  - 트위터 프로젝트 선택
+ *  - api keys => browser key 선택 => 애플리케이션 제한사항 설정 => 웹사이트 => 승인된 url 추가
+ *  - test.com/* 형식으로 도메인 추가 (localhost, firebase 도메인x)
  */

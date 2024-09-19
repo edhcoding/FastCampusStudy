@@ -69,6 +69,23 @@
  *
  *
  *
+ *
+ * Next.js에서 Tailwind 사용하기
+ * 1. yarn으로 tailwind css 설치 후, tailwind css 구성파일 설치를 위해 tailwind css init 커맨드 입력
+ * 1) yarn add -D tailwindcss postcss autoprefixer
+ * 2) npx tailwindcss init -p
+ *
+ * 2. PostCSS 설정파일에 tailwindcss 추가
+ * ex)postcss.config.js
+ * module.export = {
+ *  plugins: {
+ *    tailwindcss: {},
+ *    autoprefixer: {},
+ *  }
+ * }
+ *
+ *
+ *
  * Tailwind 개녕 & 장점
  * - Tailwind CSS: 스타일링을 더욱 편하게 도와주는 CSS 프레임워크
  * - 클래스 이름을 사용하여 스타일을 적용하는 방식 (ex. bg-blue-500, mx-4, font-bold)

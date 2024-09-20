@@ -262,4 +262,60 @@ kakao developers 세팅
 3. 플랫폼 > Web에 로컬 호스트 추가 (http://localhost:3000)
 4. 카카오 지도 API 사이트에서 > Web 선택: https://apis.map.kakao.com/web/
 • 관련 도큐를 확인하며 카카오 지도 불러오기
+
+
+
+
+
+Kakao Map API로 지도 불러오기
+카카오 지도 API 가이드: https://apis.map.kakao.com/web/guide/
+1. 지도 담을 영역 만들기 (<div id="map"></div>)  id가 map으로 시작하는 영역 만들어줘야함
+2. Javascript API로 지도 불러오기
+3. Next/Script를 사용해 스크립트 동적 로드를 위해서 카카오 맵의 load 메서드 사용하기 (https://apis.map.kakao.com/web/documentation/#load)
+4. Kakao 객체 정의가 안되었다는 eslint 에러 해결을 위해 상단에 /*global kakao*/ /*입력해줄거임                     
+5. 지도 스크립트의 로딩 및 초기화를 페이지의 상호 작용 가능한 상태와 동기화하고, 페이지 성능을 최적화하기 위해 Next/Script의 afterlnteractive strategy와 onReady 사용
+ */
+
+/**
+ * kakao map api 지도 불러오기 (코드 예시)
+ * 
+ * 상단에 카카오 객체 정의
+/*global kakao*/
+/*
+
+import Layout from '@/components/Layout';
+import Script from 'next/script';
+
+window 객체에 kakao 프로퍼티 추가 선언 (TS)
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
+카카오 지도 로드 함수 (지도 옵션 설정)
+export default function Home() {
+  const loadKakaoMap = () => {
+    window.kakao.maps. load(() => {
+      const mapContainer = document.getElementById( 'map' ) ;
+      const mapOption = {
+        center: new window.kakao.maps.LatLng(33.450701, 126.570667), 
+        level: 3,
+      }；
+      new window.kakao.maps.Map(mapContainer, mapOption);
+    });
+  }；
+
+  return (
+    ‹Layout>
+      <Script
+        strategy="afterInteractive" 
+        type="text/javascript" 
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&autoload=false'}
+        onReady={loadKakaoMap}
+      />
+      <div id="map" className="w-full h-screen"></div>
+    </Layout>
+  );
+}
  */

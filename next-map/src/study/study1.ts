@@ -247,4 +247,19 @@
         });
       }}
     />
+
+
+
+
+
+
+
+카카오 맵으로 지도 구현
+kakao developers 세팅
+1. 카카오 디벨로퍼 사이트 접속 후 앱 생성: https://developers.kakao.com/
+2. 애플리케이션 생성 후, "앱 키" 섹션의 JavaScript 키 복사
+1. 환경 변수에 "NEXT_PUBLIC_KAKAO_MAP_CLIENT”로 해당 키 저장
+3. 플랫폼 > Web에 로컬 호스트 추가 (http://localhost:3000)
+4. 카카오 지도 API 사이트에서 > Web 선택: https://apis.map.kakao.com/web/
+• 관련 도큐를 확인하며 카카오 지도 불러오기
  */

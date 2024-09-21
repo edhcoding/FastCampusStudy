@@ -26,18 +26,32 @@ export default function Map() {
 
       // 식당 데이터 마커 생성하기
       stores?.["DATA"]?.map((store) => {
-        // 마커가 표시될 위치입니다
-        const markerPosition = new window.kakao.maps.LatLng(
-          store?.y_dnts, // y 좌표값
-          store?.x_cnts // x 좌표값
+        const imageSrc = store?.bizcnd_code_nm // (마커 이미지 생성)
+            ? `/images/markers/${store?.bizcnd_code_nm}.png`
+            : "/images/markers/default.png", // 마커이미지의 주소입니다
+          imageSize = new window.kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
+          imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다 (마커 이미지 생성)
+        const markerImage = new window.kakao.maps.MarkerImage(
+          imageSrc,
+          imageSize,
+          imageOption
         );
 
-        // 마커를 생성합니다
+        // 마커가 표시될 위치입니다 (마커 생성) (마커 이미지 생성)
+        const markerPosition = new window.kakao.maps.LatLng(
+          store?.y_dnts, // 지도 y좌표 값
+          store?.x_cnts // 지도 x좌표 값
+        );
+
+        // 마커를 생성합니다 (마커 생성)
         const marker = new window.kakao.maps.Marker({
           position: markerPosition,
+          image: markerImage, // 마커이미지 설정 => !!!!!!!!!! store_data에서 카테고리에서 ex)인도/중동 이런식으로 슬래쉬로 되어있으면 인식을 못하므로 우리가 _ 언더바나 이런걸로 바꿔줘야함
         });
 
-        // 마커가 지도 위에 표시되도록 설정합니다
+        // 마커가 지도 위에 표시되도록 설정합니다 (마커 생성)
         marker.setMap(map);
       });
     });

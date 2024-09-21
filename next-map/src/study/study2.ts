@@ -188,3 +188,8 @@ sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 50 vw"
  * 위 주소에서 데이터 JSON 형식으로 다운로드 (혹은 강의 게시판에서 지도_데이터.json 파일 다운로드)
  * 프로젝트에 /src/data/store_data.josn 파일로 저장
  */
+
+/**
+ * Kakao Map 이미지 마커 구현
+ * - 이미지 마커 생성 가이드:https://apis.map.kakao.com/web/sample/basicMarkerImage/
+ */

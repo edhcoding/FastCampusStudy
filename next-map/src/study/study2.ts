@@ -178,3 +178,13 @@ sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 50 vw"
 - 애니메이션 이미지: GIF와 같은 애니메이션 이미지를 지원함
   • 기본적으로 이미지를 자동으로 최적화하고, 로딩할 때 애니메이션 유지
  */
+
+/**
+ * 카카오 맵 기본 마커 구현
+ * 카카오 지도 마커 가이드: https://apis.map.kakao.com/web/documentation/#Marker
+ * 
+ * 공공데이터 다운로드
+ * 공공 데이터: https://data.seoul.go.kr/dataList/OA-2741/S/1/datasetView.do
+ * 위 주소에서 데이터 JSON 형식으로 다운로드 (혹은 강의 게시판에서 지도_데이터.json 파일 다운로드)
+ * 프로젝트에 /src/data/store_data.josn 파일로 저장
+ */

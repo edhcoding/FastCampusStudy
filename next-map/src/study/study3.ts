@@ -12,6 +12,10 @@
 
 /**
  * Prisma란?
+ * (설치 사이트 - https://www.prisma.io/docs/getting-started/quickstart)
+ * yarn add --dev prisma
+ * npx prisma init
+ *
  * - Prisma: Node.js 기반의 ORM(Object-Relational Mapping) 도구로, 데이터베이스와의 상호 작용을 단순화하고 개발 생산성을 높이는 데 도움을 주는 도구
  * - SQL 쿼리를 직접 작성하는 대신 자바스크립트 코드로 쿼리를 작성할 수 있게 해주며, 타입 세이프한 쿼리 작성을 통해 런타임 에러를 방지
  * 이점
@@ -177,4 +181,30 @@
  * - 발급된 API 키 및 URL는 settings > API, settings > Database에서 확인
  * - Database URL를 DB 엔드포인트로 사용 예정
  * - 다음 클립에서 supabase URL를 prisma schema에 연결해서 사용
+ *
+ *
+ * 앞서 supabase 세팅 끝내면 prisma를 인스톨 해줘야함 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * 1. typescript 프로젝트에 prisma CLI 설치
+ * - yarn add --dev prisma
+ * 2. Prisma CLI로 Prisma 세팅 (설정파일 생성)
+ * - npx prisma init
+ * 3. schema.prisma 파일 생성 확인
+ * 4. schema.prisma 파일 내용 확인 (기본 DB는 postgresql로 설정됨)
+ * ex)
+ * datasource db {
+ *  provider = "postgresql"
+ *  url = env("DATAVBASE_URL")
+ * }
+ *
+ * generator client {
+ *  provider = "prisma-client-js"
+ * }
+ * 5. .env 파일에 supabase 데이터베이스 URL 추가
+ * ex)
+ * DATABASE_URL="postgresql://postgres:[~~~~~]:5432/postgres"
+ * 6. prisma/client 설치 후, 쿼리 작성
+ * - yarn add @prisma/client
+ * 
+ * 
+ * npx prisma studio - 스튜디오가 잘 켜지는지 확인하는 코드(처음에는 오류나옴 - 데이터베이스에 아무것도 안넣어서 그럼)
  */

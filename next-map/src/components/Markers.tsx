@@ -51,9 +51,9 @@ export default function Markers({
         const customOverlay = new window.kakao.maps.CustomOverlay({
           // (커스텀 오버레이 생성하기1)
           position: markerPosition,
-          content: content,
-          xAnchor: 0.6,
-          yAnchor: 0.91,
+          content,
+          xAnchor: 0.6, // 커스텀 오버레이 위치조정
+          yAnchor: 0.91, // 커스텀 오버레이 위치조정
         });
 
         // 마커에 마우스오버 이벤트를 등록합니다 ((마커에 마우스 이벤트 등록하기))

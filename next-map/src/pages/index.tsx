@@ -9,7 +9,6 @@ export default function Home() {
   const [currentStore, setCurrrentStore] = useState(null);
 
   const storeDatas = stores["DATA"];
-  console.log(currentStore);
 
   return (
     <>

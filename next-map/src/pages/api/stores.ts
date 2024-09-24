@@ -7,7 +7,9 @@ export default async function handler(
   res: NextApiResponse<StoreDataType[]>
 ) {
   const prisma = new PrismaClient();
-  const stores = await prisma.store.findMany();
+  const stores = await prisma.store.findMany({
+    orderBy: { id: "asc" },
+  });
 
   // const stores = (await import("../../data/store_data.json"))[
   //   "DATA"

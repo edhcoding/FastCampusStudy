@@ -1,53 +1,68 @@
+import Loading from "@/components/Loading";
 import { StoreDataType } from "@/interface";
 import axios from "axios";
 import Image from "next/image";
+import { useQuery } from "react-query";
 
-export default function StoreListPage({ stores }: { stores: StoreDataType[] }) {
+export default function StoreListPage() {
+  const {
+    data: stores,
+    isLoading,
+    isError,
+  } = useQuery("stores", async () => {
+    const { data } = await axios("/api/stores");
+    return data as StoreDataType[];
+  });
+
+  if (isError) {
+    return (
+      <div className="w-full h-screen mx-auto pt-[30%] text-red-500 text-center font-semibold">
+        Error...
+      </div>
+    );
+  }
+
   return (
     <div className="px-4 md:max-w-4xl mx-auto py-8">
       <ul role="list" className="divide-y divide-gray-100">
-        {stores?.map((store, i) => (
-          <li key={i} className="flex justify-between gap-x-6 py-5">
-            <div className="flex gap-x-4 ">
-              <Image
-                src={
-                  store?.category
-                    ? `/images/markers/${store.category}.png`
-                    : "/images/markers/default.png"
-                }
-                alt="아이콘 이미지"
-                width={48}
-                height={48}
-              />
-              <div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          stores?.map((store, i) => (
+            <li key={i} className="flex justify-between gap-x-6 py-5">
+              <div className="flex gap-x-4 ">
+                <Image
+                  src={
+                    store?.category
+                      ? `/images/markers/${store.category}.png`
+                      : "/images/markers/default.png"
+                  }
+                  alt="아이콘 이미지"
+                  width={48}
+                  height={48}
+                />
+                <div>
+                  <div className="text-sm font-semibold leading-6 text-gray-900">
+                    {store?.name}
+                  </div>
+                  <div className="mt-1 text-xs truncate font-semibold leading-5 text-gray-500">
+                    {store?.storeType}
+                  </div>
+                </div>
+              </div>
+              <div className="hidden sm:flex sm:flex-col sm:items-end">
                 <div className="text-sm font-semibold leading-6 text-gray-900">
-                  {store?.name}
+                  {store?.address}
                 </div>
                 <div className="mt-1 text-xs truncate font-semibold leading-5 text-gray-500">
-                  {store?.storeType}
+                  {store?.phone || "번호없음"} | {store?.foodCertifyName} |{" "}
+                  {store?.category}
                 </div>
               </div>
-            </div>
-            <div className="hidden sm:flex sm:flex-col sm:items-end">
-              <div className="text-sm font-semibold leading-6 text-gray-900">
-                {store?.address}
-              </div>
-              <div className="mt-1 text-xs truncate font-semibold leading-5 text-gray-500">
-                {store?.phone || "번호없음"} | {store?.foodCertifyName} |{" "}
-                {store?.category}
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const stores = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`);
-
-  return {
-    props: { stores: stores.data },
-  };
 }

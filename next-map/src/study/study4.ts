@@ -107,12 +107,20 @@
  *    </QueryClientProvider>
  *  )
  * }
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * React Query와 Next.js (reactquery5 사진)
  * React Query는 Next.js 프로젝트에도 유용하게 적용할 수 있음
  * - SSR를 사용하는 경우, getServerSideProps 혹은 SSQ를 사용하는 경우, getStaticProps와 함께 리액트 쿼리를 사용할 수 있음
  * - React Query로 데이터를 미리 가져와 페이지를 서버에서 렌더링 가능
+ */
+
+/**
+ * Axios란? (https://axios-http.com/kr/docs/intro)
+ * - Axios: HTTP 클라이언트 라이브러리로, Next.js 프로젝트와 함께 사용하여 데이터를 서버에서 가져오는 데 유용
+ * - 또한, React Query와 Axios를 함께 사용하면 더욱 편리하게 데이터를 캐싱하고 관리할 수 있음
+ * 설치 방법: yarn add axios
+ * - 기본 fetch API 보다 HTTP 요청 및 응답 처리, 설정, 요청 취소 등의 부분에서 더 풍부한 기능을 제공
  */

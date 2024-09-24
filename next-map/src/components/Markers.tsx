@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { StoreDataType } from "@/interface";
 import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
 interface MarkersProps {
   map: any;
-  stores: any[];
+  stores: StoreDataType[];
   setCurrrentStore: Dispatch<SetStateAction<any>>;
 }
 
@@ -17,8 +18,8 @@ export default function Markers({
     if (map) {
       // 식당 데이터 마커 생성하기
       stores?.map((store) => {
-        const imageSrc = store?.bizcnd_code_nm // (마커 이미지 생성)
-            ? `/images/markers/${store?.bizcnd_code_nm}.png`
+        const imageSrc = store?.category // (마커 이미지 생성)
+            ? `/images/markers/${store?.category}.png`
             : "/images/markers/default.png", // 마커이미지의 주소입니다
           imageSize = new window.kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
           imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -32,8 +33,8 @@ export default function Markers({
 
         // 마커가 표시될 위치입니다 (마커 생성) (마커 이미지 생성)
         const markerPosition = new window.kakao.maps.LatLng(
-          store?.y_dnts, // 지도 y좌표 값
-          store?.x_cnts // 지도 x좌표 값
+          store?.lat, // 지도 y좌표 값
+          store?.lng // 지도 x좌표 값
         );
 
         // 마커를 생성합니다 (마커 생성)
@@ -46,7 +47,7 @@ export default function Markers({
         marker.setMap(map);
 
         // 마커 커서가 오버되었을 때 마커 위에 표시할 인포 윈도우 생성
-        const content = `<div class="infowindow">${store?.upso_nm}</div>`; // 인포 윈도우에 표시할 내용 (마커에 마우스 이벤트 등록하기)
+        const content = `<div class="infowindow">${store?.name}</div>`; // 인포 윈도우에 표시할 내용 (마커에 마우스 이벤트 등록하기)
 
         const customOverlay = new window.kakao.maps.CustomOverlay({
           // (커스텀 오버레이 생성하기1)

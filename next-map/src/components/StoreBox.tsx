@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { StoreDataType } from "@/interface";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import {
@@ -10,7 +11,7 @@ import {
 import { HiOutlineMapPin } from "react-icons/hi2";
 
 interface StoreBoxProps {
-  currentStore: any;
+  currentStore: StoreDataType | null;
   setCurrentStore: Dispatch<SetStateAction<any>>;
 }
 
@@ -27,8 +28,8 @@ export default function StoreBox({
               <div className="flex gap-4 items-center">
                 <Image
                   src={
-                    currentStore?.bizcnd_code_nm
-                      ? `/images/markers/${currentStore?.bizcnd_code_nm}.png`
+                    currentStore?.category
+                      ? `/images/markers/${currentStore?.category}.png`
                       : "/images/markers/default.png"
                   }
                   alt="아이콘 이미지"
@@ -36,8 +37,8 @@ export default function StoreBox({
                   height={40}
                 />
                 <div>
-                  <div className="font-semibold">{currentStore?.upso_nm}</div>
-                  <div className="text-sm">{currentStore?.cob_code_nm}</div>
+                  <div className="font-semibold">{currentStore?.name}</div>
+                  <div className="text-sm">{currentStore?.storeType}</div>
                 </div>
               </div>
               <button type="button" onClick={() => setCurrentStore(null)}>
@@ -46,19 +47,19 @@ export default function StoreBox({
             </div>
             <div className="mt-4 flex gap-2 items-center">
               <HiOutlineMapPin />
-              {currentStore?.rdn_code_nm}
+              {currentStore?.address}
             </div>
             <div className="mt-2 flex gap-2 items-center">
               <AiOutlinePhone />
-              {currentStore?.tel_no}
+              {currentStore?.phone}
             </div>
             <div className="mt-2 flex gap-2 items-center">
               <AiOutlineInfoCircle />
-              {currentStore?.crtfc_gbn_nm}
+              {currentStore?.storeType}
             </div>
             <div className="mt-2 flex gap-2 items-center">
               <AiOutlineCheck />
-              {currentStore?.bizcnd_code_nm}
+              {currentStore?.category}
             </div>
           </div>
           <button

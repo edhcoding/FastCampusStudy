@@ -204,7 +204,41 @@
  * DATABASE_URL="postgresql://postgres:[~~~~~]:5432/postgres"
  * 6. prisma/client 설치 후, 쿼리 작성
  * - yarn add @prisma/client
- * 
- * 
+ *
+ *
  * npx prisma studio - 스튜디오가 잘 켜지는지 확인하는 코드(처음에는 오류나옴 - 데이터베이스에 아무것도 안넣어서 그럼)
+ */
+
+/**
+ * Prisma 데이터 seed
+ *
+ * 데이터 시드 (seed)
+ * - 초기 데이터나 테스트 데이터를 생성하고 채우는 과정
+ * - 데이터를 prisma로 seed하기 위해서는 우선 모델을 만들고 마이그레이션 하는 과정을 거쳐야 합니다.
+ * 데이터 모델을 정의하고 seed 데이터를 생성을 해야 그 다음에 데이터베이스에 직접 우리가 만들고자 하는 데이터를 삽입 할 수 있음
+ *
+ *
+ * Prisma Migration (seed1 사진)
+ * 1. Prisma.schema 모델링
+ * 2. 마이그레이션 명령어 입력
+ * - npx prisma migrate dev --name init
+ *
+ *
+ * Prisma Seed (seed2 사진)
+ * 1. package.json에 seed 스크립트 추가
+ * - yarn add --dev ts-node   => package.json에 추가
+ * "prisma": {
+  "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+},
+ * 2. prisma 폴더 내에 seed.ts 파일 생성 후, seed 코드 작성
+ * 3. Seed 함수 예시 (seed3 사진)
+ * 4. npx prisma로 데이터 시드 실행
+ * - npx prisma db seed
+ *
+ *
+ *
+ *
+ * npx prisma format - 줄맞춤
+ * !!!!!!!!!!!!!!!!!!! npx prisma migrate dev --name init 안되는 이유 찾음
+ * - next.js에서는 DATABASE_URL, DIRECT_URL 두 가지 모두 설정해줘야 함 => home 첫 화면에서 오른쪽 위에 connect 눌러서 => ORMs 누르면 둘다 있음!!!
  */

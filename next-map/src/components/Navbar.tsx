@@ -9,8 +9,6 @@ export default function Navbar() {
 
   const { data, status } = useSession();
 
-  console.log(data, status);
-
   return (
     <>
       <div className="navbar">
@@ -28,7 +26,9 @@ export default function Navbar() {
             찜한가계
           </Link>
           {status === "authenticated" ? (
-            <button type="button" onClick={() => signOut()}>로그아웃</button>
+            <button type="button" onClick={() => signOut()}>
+              로그아웃
+            </button>
           ) : (
             <Link href="/api/auth/signin" className="navbar__list--item">
               로그인

@@ -111,10 +111,27 @@
 
 /**
  * Google Login
- * 
  * Next-auth 세팅 (Google: https://next-auth.js.org/providers/google) (auth8 사진)
  * 1. https://console.developers.google.com/apis/credentials 에서 API 및 서비스 > 사용자 인증 정보 > API 키 생성
  * - 생성된 클라이언트 ID와 보안 비밀번호 환경변수에 추가 (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET)
  * - 승인된 리디렉션 URL에 http://localhost:3000/api/auth/callback/google 추가
  * 2. [...nextauth].js 파일에 다음 코드 추가: - 사진
+ *
+ *
+ *
+ *
+ * Naver Login
+ * Next-auth 세팅 (Naver: https://next-auth.js.org/providers/naver)
+ * 1. https://developers.naver.com/main/ 네이버 디벨로퍼 가입 후, 네이버 로그인 클릭
+ * - 오픈 API 이용 신청 > 서비스 URL에 로컬 호스트 추가
+ * - 네아로 Callback URL에 http://localhost:3000/api/auth/callback/naver 추가
+ * - 애플리케이션 정보의 클라이언트 아이디 및 시크릿 키 저장 (NAVER_CLIENT_ID, NAVER_CLIENT_SECRET)
+ * 2. [...nextauth].js 파일에 코드 추가
+ * 
+ * 
+ * 
+ * 
+ * 
+ * Prisma Schema 수정 (naver1 사진)
+ * - 네이버는 name 값이 필수로 오지 않기 때문에, name 값을 optional로 변경 (물음표)
  */

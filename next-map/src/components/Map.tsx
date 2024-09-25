@@ -10,20 +10,28 @@ declare global {
 
 interface MapProps {
   setMap: Dispatch<SetStateAction<any>>;
+  lat?: string | null;
+  lng?: string | null;
+  zoom?: number;
 }
 
 const DEFAULT_LAT = 37.497625203; // 위도
 const DEFAULT_LNG = 127.03088379; // 경도
 
-export default function Map({ setMap }: MapProps) {
+const DEFAULT_ZOOM = 3;
+
+export default function Map({ setMap, lat, lng, zoom }: MapProps) {
   const loadKakaoMap = () => {
     // kakao map 로드 함수
     window.kakao.maps.load(() => {
       // React에서는 우리가 HTML의 script 태그에서 로드한 객체는 무조건 window 객체 밑에 붙게 되어 있음
       const mapContainer = document.getElementById("map");
       const mapOptions = {
-        center: new window.kakao.maps.LatLng(DEFAULT_LAT, DEFAULT_LNG),
-        level: 3,
+        center: new window.kakao.maps.LatLng(
+          lat ?? DEFAULT_LAT,
+          lng ?? DEFAULT_LNG
+        ),
+        level: zoom ?? DEFAULT_ZOOM,
       };
 
       const map = new window.kakao.maps.Map(mapContainer, mapOptions);

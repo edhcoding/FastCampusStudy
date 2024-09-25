@@ -9,3 +9,10 @@ export interface StoreDataType {
   storeType?: string | null; // cob_code_nm
   foodCertifyName?: string | null; // crtfc_gbn_nm
 }
+
+export interface StoreApiResponse {
+  data: StoreDataType[];
+  page?: number;
+  totalPage?: number;
+  totalCount?: number;
+}

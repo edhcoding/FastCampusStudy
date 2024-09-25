@@ -161,3 +161,7 @@
  * ex)
  * signIn("google", { callbackUrl: "http://localhost:3000/bar"})
  */
+
+/**
+ * 상세페이지 레이아웃 (상세1 사진)
+ */

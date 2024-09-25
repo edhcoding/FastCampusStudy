@@ -1,8 +1,108 @@
+import Loader from "@/components/Loader";
+import { StoreDataType } from "@/interface";
+import axios from "axios";
 import { useRouter } from "next/router";
+import { useQuery } from "react-query";
 
 export default function StoreDetailPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  return <div>StoreDetailPage: {id}</div>;
+  const fetchStore = async () => {
+    const { data } = await axios(`/api/stores?id=${id}`);
+    return data as StoreDataType;
+  };
+
+  const {
+    data: store,
+    isFetching,
+    isError,
+  } = useQuery(`store-${id}`, fetchStore, {
+    enabled: !!id, // enabled가 false 이면 react query를 멈출 수 있음, id 값이 없으면 데이터를 못가져오도록 함
+  });
+
+  if (isError) {
+    return (
+      <div className="w-full h-screen mx-auto pt-[30%] text-red-500 text-center font-semibold">
+        Error...
+      </div>
+    );
+  }
+
+  if (isFetching) {
+    return <Loader className="mt-[20%]" />;
+  }
+
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-8">
+      <div className="px-4 sm:px-0">
+        <h3 className="text-base font-semibold leading-7 text-gray-900">
+          {store?.name}
+        </h3>
+        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+          {store?.address}
+        </p>
+      </div>
+      <div className="mt-6 border-t border-gray-100">
+        <dl className="divide-y divide-gray-100">
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              카테고리
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {store?.category}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              주소
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {store?.address}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              위도
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {store?.lat}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              경도
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {store?.lng}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              연락처
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {store?.phone}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              식품인증구분
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {store?.foodCertifyName}
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
+              업종명
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              {store?.storeType}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  );
 }

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { StoreDataType } from "@/interface";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 import {
   AiOutlineCheck,
@@ -19,6 +20,8 @@ export default function StoreBox({
   currentStore,
   setCurrentStore,
 }: StoreBoxProps) {
+  const router = useRouter();
+
   return (
     <div className="fixed transition ease-in-out delay-150 inset-x-0 mx-auto bottom-5 rounded-lg shadow-lg max-w-sm md:max-w-xl z-10 w-full bg-white">
       {currentStore && (
@@ -64,7 +67,7 @@ export default function StoreBox({
           </div>
           <button
             type="button"
-            onClick={() => window.alert("상세보기 작업중")}
+            onClick={() => router.push(`/stores/${currentStore.id}`)}
             className="w-full bg-blue-700 hover:bg-blue-500 focus:bg-blue-500 py-3 text-white font-semibold rounded-b-lg"
           >
             상세보기

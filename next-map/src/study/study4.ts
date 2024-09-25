@@ -142,12 +142,69 @@
  * - 하나의 페이지에 모든 항목을 표시하면 사용자 경험이 좋지 않기 때문에, 긴 목록을 여러 페이지로 나누어 보여주면 사용자가 쉽게 정보를 찾을 수 있음
  * - Pagination은 주로 검색 결과, 게시글 목록, 제품 목록 등 다양한 웹 애플리케이션에서 사용됨
  * - Pagination은 서버에서 클라이언트로 데이터를 나누어 전송하므로, 대용량 데이터를 다룰 때 유용
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * Pagination 설계(pagination1 사진)
  * - 페이지 넘버를 query params로 넘겨서, 각 페이지에 맞는 데이터를 10개만 부러오도록 작업
  * - 총 페이지 수가 10개 이하인 경우에는, 각각 페이지를 클릭할 수 있도록 아래와 같이 모든 페이지 숫자를 화면에 나열하는 방식
  * - 만약 총 페이지 수가 10개보다 많은 경우에는, 현재 페이지 숫자만 화면에 표시하고, "이전"과 "다음" 버튼으로 페이지 이동
+ */
+
+/**
+ * 무한 스크롤이란?
+ * - 무한 스크롤(infinite scroll): 사용자 경험을 개선하기 위해 페이지 로딩 없이 스크롤을 통해 추가 데이터를 로드하는 기법
+ * - 페이지 하단에 도달할 때 새로운 데이터를 가져와서 보여 줌
+ * - 사용자가 스크롤을 위아래로 움직일 때 이벤트를 감지하고 추가 데이터를 가져오는 로직을 수행
+ * - React Query의 Infinite Queryies를 사용해서 무한 스크롤을 구현할 수 있음
+ * - 공식 도큐: https://tanstack.com/query/latest/docs/framework/react/guides/infinite-queries
+ *
+ *
+ *
+ * React Query의 infiniteQuery란? (infinite1 사진)
+ * - 무한 스크롤: 웹 애플리케이션에서 여러 페이지의 데이터를 동적으로 로드하는 기술
+ * - React Query의 inifite query : 무한 스크롤을 지원하고, 화면 스크롤을 통해 추가 데이터를 자동로드할 수 있는 강력한 기능
+ * - pagination 작업을 간소화하고, 데이터를 무한으로 스크롤링할 때 필요한 다양한 도구와 기능을 제공
+ * - 사용자 경험을 향상시키며, 데이터를 효율적으로 로딩할 수 있음
+ *
+ *
+ *
+ *
+ *
+ * React Query의 infiniteQuery기능 (infinite2 사진)
+ * React Query가 설칟괸 프로젝트에서, 아래와 같이 React Query를 사용하여 Infinite Query를 생성
+ * - fetchPosts: 페이지별로 데이터를 가져오는 역할
+ * - getNextPageParam: 콜백 함수를 사용해서 다음 페이지를 정의
+ *
+ *
+ *
+ *
+ * React Query의 infiniteQuery 사용법 (infinite3 사진)
+ * - 아래 예시: 데이터들을 사용해서 UI를 그리고, 무한 스크롤을 수동으로 제어할 수 있는 버튼 생성
+ * - data.pages를 통해 페이지별로 데이터를 렌더링
+ * - fetchNextPage 함수를 호출하여 다음 페이지의 데이터를 가져옴
+ * - hasNextPage와 isFetching를 사용하여 무한스크롤 버튼을 제어
+ *
+ *
+ *
+ *
+ * React Query의 infiniteQuery 사용법2 (infinite4 사진)
+ * Intersection Observer를 활용해서, 특정 영역에 도달했을 때 다음 페이지를 가져오는 무한 스크롤 구현
+ * - useIntersectionObserver 훅을 생성해서 리스트 하단에 도달했는지 (isIntersecting) 확인
+ * - 만약 페이지 하단에 도달하고, 다음 페이지가 있다면 리액트 쿼리의 fetchNextPage() 함수 호출
+ * - 마지막 페이지에 다다를 때 까지 위 단계들 반복
+ *
+ *
+ *
+ *
+ *
+ * Infinite Queries 주요 개념
+ * - data: Infinite Query 결과 데이터
+ * - data.pages: 가져온 페이지들의 배열
+ * - data.pageParams: 페이지를 가져오기 위한 페이지 매개 변수. 배열의 형태.
+ * - fetchNextPage, fetchPreviousPage: 다음 페이지 및 이전 페이지의 데이터를 가져오는 함수
+ * - getNextPageParam. getPreviousPageParam: 다음 및 이전 페이지에 대한 매개 변수를 생성하는 함수
+ * - hasNextPage, hasPreviousPage: 다음 페이지 및 이전 페이지가 있는지 여부를 나타내는 불리언 값
+ * - isFetchingNextPage, isFetchingPreviousPage: 다음 페이지 또는 이전 페이지의 데이터를 가져오는 동 안 로딩 상태를 나타내는 불리언 값
  */

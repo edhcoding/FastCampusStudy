@@ -8,7 +8,7 @@ import { SiNaver } from "react-icons/si";
 export default function LoginPage() {
   const router = useRouter();
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -33,7 +33,7 @@ export default function LoginPage() {
         <div className="flex flex-col gap-3">
           <button
             type="button"
-            onClick={() => signIn("google")}
+            onClick={() => signIn("google", { callbackUrl: "/" })}
             className="text-white flex gap-2 bg-[#4285F4] hover:bg-[#4285F4]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center"
           >
             <AiOutlineGoogle className="size-6" />
@@ -41,7 +41,7 @@ export default function LoginPage() {
           </button>
           <button
             type="button"
-            onClick={() => signIn("naver")}
+            onClick={() => signIn("naver", { callbackUrl: "/" })}
             className="text-white flex gap-3 bg-[#2db400] hover:bg-[#2db400]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center"
           >
             <SiNaver className="size-4" />
@@ -49,7 +49,7 @@ export default function LoginPage() {
           </button>
           <button
             type="button"
-            onClick={() => signIn("kakao")}
+            onClick={() => signIn("kakao", { callbackUrl: "/" })}
             className="text-black flex gap-3 bg-[#fef01b] hover:bg-[#fef01b]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center"
           >
             <RiKakaoTalkFill className="size-6" />

@@ -127,11 +127,37 @@
  * - 네아로 Callback URL에 http://localhost:3000/api/auth/callback/naver 추가
  * - 애플리케이션 정보의 클라이언트 아이디 및 시크릿 키 저장 (NAVER_CLIENT_ID, NAVER_CLIENT_SECRET)
  * 2. [...nextauth].js 파일에 코드 추가
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
  * Prisma Schema 수정 (naver1 사진)
  * - 네이버는 name 값이 필수로 오지 않기 때문에, name 값을 optional로 변경 (물음표)
+ *
+ *
+ *
+ *
+ * Kakao Login 구현
+ * Next-auth 세팅 (kakao: https://next-auth.js.org/providers/kakao)
+ * 1. https://developers.kakao.com/ 카카오 디벨로퍼 가입 후 , 앱 등록 > 동의 항목 설정
+ * - 내 앱 > 앱 설정 > 앱 키 > REST API 키 복사 (KAKAO_CLIENT_ID)
+ * - 내 앱 > 제품 설정 > 카카오 로그인 > 보안에서 Client Secret 코드 발급 (KAKAO_CLIENT_SECRET)
+ * - 내 앱 > 제품 설정 > 카카오 로그인 > 활성화
+ * - 내 앱 > 제품 설정 > 카카오 로그인 > 동의 항목 구성 (닉네임- 필수, 프로필, 이메일)
+ * - 내 앱 > 제품 설정 > 카카오 로그인 > Redirect URI > http://localhost:3000/api/auth/callback/kakao
+ * - 애플리케이션 정보의 클라이언트 아이디 및 시크릿 키 저장
+ * 2. [...nextauth].js 파일에 코드 추가
+ * 3. Prisma Schema 변경: refresh_token_expires_in (Int) optional 필드 추가 (kakao1 사진)
+ *
+ *
+ *
+ *
+ *
+ *
+ * 로그인시 callbackUrl 속성 추가
+ * - 로그인 후, 로그인 화면으로 돌아오지 않고 루트 페이지로 가도록 callbackUrl 속성 추가
+ * - Next Auth 공식 도큐: https://next-auth.js.org/getting-started/client#signin
+ * ex)
+ * signIn("google", { callbackUrl: "http://localhost:3000/bar"})
  */

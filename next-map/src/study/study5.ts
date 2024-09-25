@@ -108,3 +108,13 @@
  * 터미널에
  * - openssl rand -base64 24
  */
+
+/**
+ * Google Login
+ * 
+ * Next-auth 세팅 (Google: https://next-auth.js.org/providers/google) (auth8 사진)
+ * 1. https://console.developers.google.com/apis/credentials 에서 API 및 서비스 > 사용자 인증 정보 > API 키 생성
+ * - 생성된 클라이언트 ID와 보안 비밀번호 환경변수에 추가 (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET)
+ * - 승인된 리디렉션 URL에 http://localhost:3000/api/auth/callback/google 추가
+ * 2. [...nextauth].js 파일에 다음 코드 추가: - 사진
+ */

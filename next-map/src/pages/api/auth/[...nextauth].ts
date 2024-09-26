@@ -1,6 +1,6 @@
+import NextAuth from "next-auth/next";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
-import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import NaverProvider from "next-auth/providers/naver";
 import KakaoProvider from "next-auth/providers/kakao";
@@ -8,6 +8,11 @@ import KakaoProvider from "next-auth/providers/kakao";
 const prisma = new PrismaClient();
 
 export const authOptions = {
+  session: {
+    strategy: "jwt" as const,
+    maxAge: 24 * 60 * 60, // 1 days
+    updateAge: 2 * 60 * 60, // 2 hours
+  },
   adapter: PrismaAdapter(prisma),
 
   providers: [

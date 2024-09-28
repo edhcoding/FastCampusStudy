@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Loading from "@/components/Loading";
 import { StoreDataType } from "@/interface";
 import axios from "axios";
@@ -11,6 +11,14 @@ import Loader from "@/components/Loader";
 import SearchFilter from "@/components/SearchFilter";
 
 export default function StoreListPage() {
+  const [q, setQ] = useState<string | null>(null);
+  const [district, setDistrict] = useState<string | null>(null);
+
+  const searchParams = {
+    q,
+    district,
+  };
+
   const ref = useRef<HTMLDivElement | null>(null);
   const pageRef = useIntersectionObserver(ref, {});
   const isPageEnd = !!pageRef?.isIntersecting; // 페이지 하단에 왔는지 안왔는지 확인하기 위해서
@@ -27,8 +35,9 @@ export default function StoreListPage() {
   const fetchStores = async ({ pageParam = 1 }) => {
     const { data } = await axios("/api/stores", {
       params: {
-        limit: 10,
         page: pageParam,
+        limit: 10,
+        ...searchParams,
       },
     });
 
@@ -43,7 +52,7 @@ export default function StoreListPage() {
     fetchNextPage,
     isLoading,
     isError,
-  } = useInfiniteQuery("stores", fetchStores, {
+  } = useInfiniteQuery(["stores", searchParams], fetchStores, {
     getNextPageParam: (lastpage: any) =>
       lastpage.data?.length > 0 ? lastpage.page + 1 : undefined,
     // getNextPageParam. getPreviousPageParam: 다음 및 이전 페이지에 대한 매개 변수를 생성하는 함수
@@ -81,7 +90,7 @@ export default function StoreListPage() {
   return (
     <div className="px-4 md:max-w-4xl mx-auto py-8">
       {/* search filter */}
-      <SearchFilter />
+      <SearchFilter setQ={setQ} setDistrict={setDistrict} />
       <ul role="list" className="divide-y divide-gray-100">
         {isLoading ? (
           <Loading />

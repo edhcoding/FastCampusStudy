@@ -2,11 +2,18 @@ import { StoreApiResponse, StoreDataType } from "@/interface";
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+interface ResponseType {
+  page?: string;
+  limit?: string;
+  q?: string;
+  district?: string;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<StoreApiResponse | StoreDataType[] | StoreDataType>
 ) {
-  const { page = "" }: { page?: string } = req.query;
+  const { page = "", limit = "", q, district }: ResponseType = req.query;
   const prisma = new PrismaClient();
 
   if (page) {
@@ -14,8 +21,12 @@ export default async function handler(
     const skipPage = parseInt(page) - 1;
     const stores = await prisma.store.findMany({
       orderBy: { id: "asc" },
+      where: {
+        name: q ? { contains: q } : {}, // q가 포함되어 있는지
+        address: district ? { contains: district } : {},
+      },
       skip: skipPage * 10, // 2. 처음부터 10개 건너뛰고 그다음 11번째부터 보여줘! (offset)
-      take: 10, // 1. 한 번에 10개 데이터 보여줘! (limit)
+      take: parseInt(limit), // 1. 한 번에 10개 데이터 보여줘! (limit)
     });
 
     // totalPage, page, data

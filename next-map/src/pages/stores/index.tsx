@@ -37,7 +37,8 @@ export default function StoreListPage() {
       params: {
         page: pageParam,
         limit: 10,
-        ...searchParams,
+        q,
+        district,
       },
     });
 

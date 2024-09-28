@@ -16,9 +16,11 @@ function useIntersectionObserver(
 
     if (!node || !hasIOSupport) return;
 
-    const observerParams = { threshold, root, rootMargin };
-
-    const observer = new IntersectionObserver(updateEntry, observerParams);
+    const observer = new IntersectionObserver(updateEntry, {
+      threshold,
+      root,
+      rootMargin,
+    });
 
     observer.observe(node);
 

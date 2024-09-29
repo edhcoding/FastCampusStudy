@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { locationState, mapState } from "@/atom";
 import Script from "next/script";
-import { Dispatch, SetStateAction } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 declare global {
   interface Window {
@@ -9,18 +10,15 @@ declare global {
 }
 
 interface MapProps {
-  setMap: Dispatch<SetStateAction<any>>;
   lat?: string | null;
   lng?: string | null;
   zoom?: number;
 }
 
-const DEFAULT_LAT = 37.497625203; // 위도
-const DEFAULT_LNG = 127.03088379; // 경도
+export default function Map({ lat, lng, zoom }: MapProps) {
+  const setMap = useSetRecoilState(mapState);
+  const location = useRecoilValue(locationState);
 
-const DEFAULT_ZOOM = 3;
-
-export default function Map({ setMap, lat, lng, zoom }: MapProps) {
   const loadKakaoMap = () => {
     // kakao map 로드 함수
     window.kakao.maps.load(() => {
@@ -28,10 +26,10 @@ export default function Map({ setMap, lat, lng, zoom }: MapProps) {
       const mapContainer = document.getElementById("map");
       const mapOptions = {
         center: new window.kakao.maps.LatLng(
-          lat ?? DEFAULT_LAT,
-          lng ?? DEFAULT_LNG
+          lat ?? location.lat,
+          lng ?? location.lng
         ),
-        level: zoom ?? DEFAULT_ZOOM,
+        level: zoom ?? location.zoom,
       };
 
       const map = new window.kakao.maps.Map(mapContainer, mapOptions);

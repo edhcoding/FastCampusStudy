@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { mapState } from "@/atom";
 import { StoreDataType } from "@/interface";
 import { useCallback, useEffect } from "react";
+import { useRecoilValue } from "recoil";
 
 interface MarkersProps {
-  map: any;
   store: StoreDataType;
 }
 
-export default function Marker({ map, store }: MarkersProps) {
+export default function Marker({ store }: MarkersProps) {
+  const map = useRecoilValue(mapState);
+
   const loadKakaoMarker = useCallback(() => {
     if (map && store) {
       // 현재 선택한 식당 데이터 마커 하나 생성하기

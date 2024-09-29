@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { currentStoreState, mapState } from "@/atom";
 import { StoreDataType } from "@/interface";
-import { Dispatch, SetStateAction, useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 interface MarkersProps {
-  map: any;
   stores: StoreDataType[];
-  setCurrrentStore: Dispatch<SetStateAction<any>>;
 }
 
-export default function Markers({
-  map,
-  stores,
-  setCurrrentStore,
-}: MarkersProps) {
+export default function Markers({ stores }: MarkersProps) {
+  const map = useRecoilValue(mapState);
+  const setCurrentStore = useSetRecoilState(currentStoreState);
+
   const loadKakaoMarkers = useCallback(() => {
     if (map) {
       // 식당 데이터 마커 생성하기
@@ -71,11 +70,11 @@ export default function Markers({
 
         // 선택한 가계 저장
         window.kakao.maps.event.addListener(marker, "click", function () {
-          setCurrrentStore(store);
+          setCurrentStore(store);
         });
       });
     }
-  }, [map, setCurrrentStore, stores]);
+  }, [map, setCurrentStore, stores]);
 
   useEffect(() => {
     loadKakaoMarkers();

@@ -62,7 +62,7 @@
  * </form>
  *
  *
- * 설치방법
+ * 설치방법 (https://www.react-hook-form.com/get-started/)
  * yarn add react-hook-form
  *
  *
@@ -76,4 +76,17 @@
  *
  * - 학습 필요: 초기 학습 곡선이 다소 가파를 수 있으며, 문서화가 완벽하지 않을 수 있음
  * - 비제어 컴포넌트: 비제어 컴포넌트를 사용하기 때문에, React의 일관된 상태 관리 패턴을 따르지 않음
+ *
+ *
+ * 참고 사이트
+ * - 폼 레이아웃 (tailwind ui) - https://tailwindui.com/components/application-ui/forms/form-layouts
+ */
+
+/**
+ * Recoil 중복된 atom key 이슈 (https://recoiljs.org/ko/docs/api-reference/core/RecoilEnv/)
+ * - 이슈 개요: next dev를 사용해서 프로젝트를 실행하면, Duplicate atom key "map"! This is a FATAL ERROR in production. But it is safe to ignore this warning if it occurred because of hot module replacement. 라는 에러 메세지가 콘솔에 출력됨
+ * - 이슈 원인: Next.js 개발 중 파일이 변경되면 다시 빌드되는 과정에서 atom으로 만든 state가 재선언되 는데, 재선언되는 과정에서 이미 key로 선언된 값을 다시 사용해서 문제가 발생
+ * - 해결방법:.env 환경 변수 파일에 아래 코드 추가 (0.7.6 버전 이상에서 사용 가능)
+ * (RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false)
+ * - 해결방법 2: 문제가 되는 key 값에 uuid() 라이브러리를 활용해서 난수 추가
  */

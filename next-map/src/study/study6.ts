@@ -90,3 +90,66 @@
  * (RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED=false)
  * - 해결방법 2: 문제가 되는 key 값에 uuid() 라이브러리를 활용해서 난수 추가
  */
+
+/**
+ * 다음 우편번호 서비스란?
+ * - 다음(Daum) 우편번호 서비스 API: Daum에서 제공하는 우편번호 검색 및 주소 검색 기능을 웹 애플리케 이션에 통합하기 위한 API (https://postcode.map.daum.net/guide)
+ * - 사용자 인터페이스 팝업: 사용자가 주소를 검색하고 선택할 수 있는 비를 팝업으로 띄워줌
+ * - 검색 및 결과 창: 팝업에는 주소를 검색할 수 있는 검색 창과 검색 결과를 표시하는 결과 창이 포함
+ * - 콜백 함수: 선택한 주소 정보 또는 우편번호 정보를 처리하기 위한 콜백 함수를 정의
+ *
+ *
+ *
+ *
+ * 다음 우편번호 서비스란? (daum1 사진)
+ * - new daum.Postcode(): Daum 우편번호 서비스 객체를 생성
+ * - embed(): 생성한 Daum 우편번호 서비스 객체를 웹 페이지에 포함(팝업 열림)
+ * - close(): 팝업 닫기
+ * - onComplete: 사용자가 주소를 선택하거나 검색을 완료한 후 호출되는 콜백 함수
+ * - onResize: 팝업의 크기가 변경될 때 호출되는 이벤트
+ *
+ *
+ *
+ *
+ *
+ * react-daum-postcode 라이브러리 소개
+ * Github 링크: https://github.com/kmsbernard/react-daum-postcode
+ * - React 애플리케이션에서 다음(Daum) 우편번호 서비스를 쉽게 통합할 수 있도록 도와주는 라이브러리
+ * - Daum 우편번호 서비스 통합: Daum 우편번호 서비스와 간단하게 통합하여, 사용자는 우편번호 검색, 주소 선택 등을 Daum의 이를 통해 수행할 수 있음
+ * - 모달 팝업: 모달 팝업에서 주소 검색 및 선택을 수행하고, 선택한 주소를 리액트 앱으로 전달할 수 있음
+ * - 커스터마이징: 모달 팝업의 모양과 동작을 커스터마이징할 수 있음
+ * - 간편한 사용: React 컴포넌트 형태로 제공되므로 React 프로젝트에서 쉽게 사용할 수 있음
+ * import DaumPostcodeEmbed from 'react-daum-postcode' ;
+ * <DaumPostcodeEmbed onComplete={handleComplete} {...props} />
+ *
+ *
+ *
+ *
+ * 코드예시 (daum2 사진)
+ * 1. react-daum-postcode 라이브러리 설치
+ * - yarn add react-daum-postcode
+ * 2. 리액트 컴포넌틀르 import 하여 사용
+ * 3. 모달 팝업이 열리고, 사용자가 주소를 검색 및 선택하면, handleComplete 콜백 함수가 호출되고, 선택한 주소 데이터가 전달됨
+ *
+ *
+ *
+ * 코드예시: handleComplete 함수 예시 (daum3 사진)
+ * - 도로명 주소의 경우, 데이터 정제가 필요함. 아래와 같은 필드를 받아서 address 값으로 저장해줌
+ * addressType: (R/J) 검색된 기본 주소 타입 -R(도로명), J(지번)
+ * bname: 법정동/법정리 이름
+ * buildingName: 건물명
+ *
+ *
+ *
+ * 코드예시: Prisma로 데이터 처리 (daum4 사진)
+ * 1. 카카오 주소 검색 API를 사용해서 저장할 주소 검색
+ * - 공식문서 - https://developers.kakao.com/docs/latest/ko/local/dev-guide
+ * - GET 요청: https://dapi.kakao.com/v2/local/search/address.json?query={71}
+ * 2. 주소 검색 후 가져온 응답에서 위도(y), 경도(x)값 추출 & 저장
+ * - 응답 문서: https://developers.kakao.com/docs/latest/ko/local/dev-guide#address-coord-response
+ * - 위도/경도값 추출: data: {...formData, lat: data.documents[O].y, Ing: data.documents[0].x}
+ *
+ * 헤더: Authorization: KakaoAK${REST_API_KEY} 인증방식, REST API 키로 인증 요청
+ * 쿼리: 검색을 원하는 질의어를 string 값으로 요청
+ * 응답: documents 내에 x값(X좌표값/경도), y값(Y좌표값/위도) 저장
+ */

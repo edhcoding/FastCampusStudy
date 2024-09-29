@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import Loading from "@/components/Loading";
 import { StoreDataType } from "@/interface";
 import axios from "axios";
@@ -9,19 +9,23 @@ import { useInfiniteQuery } from "react-query";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import Loader from "@/components/Loader";
 import SearchFilter from "@/components/SearchFilter";
+import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
+import { searchState } from "@/atom";
 
 export default function StoreListPage() {
-  const [q, setQ] = useState<string | null>(null);
-  const [district, setDistrict] = useState<string | null>(null);
+  const searchValue = useRecoilValue(searchState);
 
-  const searchParams = {
-    q,
-    district,
-  };
+  const router = useRouter();
 
   const ref = useRef<HTMLDivElement | null>(null);
   const pageRef = useIntersectionObserver(ref, {});
   const isPageEnd = !!pageRef?.isIntersecting; // 페이지 하단에 왔는지 안왔는지 확인하기 위해서
+
+  const searchParams = {
+    q: searchValue?.q,
+    district: searchValue?.district,
+  };
 
   // const {
   //   data: stores,
@@ -37,8 +41,7 @@ export default function StoreListPage() {
       params: {
         page: pageParam,
         limit: 10,
-        q,
-        district,
+        ...searchParams,
       },
     });
 
@@ -91,7 +94,7 @@ export default function StoreListPage() {
   return (
     <div className="px-4 md:max-w-4xl mx-auto py-8">
       {/* search filter */}
-      <SearchFilter setQ={setQ} setDistrict={setDistrict} />
+      <SearchFilter />
       <ul role="list" className="divide-y divide-gray-100">
         {isLoading ? (
           <Loading />
@@ -99,7 +102,11 @@ export default function StoreListPage() {
           stores?.pages?.map((page, i) => (
             <React.Fragment key={i}>
               {page.data.map((store: StoreDataType, i: number) => (
-                <li key={i} className="flex justify-between gap-x-6 py-5">
+                <li
+                  key={i}
+                  className="flex justify-between gap-x-6 py-5 cursor-pointer hover:bg-gray-50"
+                  onClick={() => router.push(`/stores/${store?.id}`)}
+                >
                   <div className="flex gap-x-4 ">
                     <Image
                       src={

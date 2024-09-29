@@ -180,3 +180,26 @@
  *
  * !!!!!!!!!!!!!!!!!(recoil 1~7 사진)
  */
+
+/**
+ * https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices
+ * - 이 페이지를 보면 prisma랑 next.js를 같이 사용해서 dev 모드를 사용하면 warn(prisma-client) There are already 10 instances of Prisma Client actively running.
+ * 이 와 같은 warning이 나온다. next dev 모드는 node.js 캐쉬를 없애기 때문에 매번 PrismaClient를 새로 생성해서 성능 문제를 일으키므로 
+ * import { PrismaClient } from '@prisma/client'
+
+const prismaClientSingleton = () => {
+  return new PrismaClient()
+}
+
+declare const globalThis: {
+  prismaGlobal: ReturnType<typeof prismaClientSingleton>;
+} & typeof global;
+
+const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
+
+export default prisma
+
+if (process.env.NODE_ENV !== 'production') globalThis.prismaGlobal = prisma
+
+이와 같은 방식으로 해결해줘야합니다
+ */

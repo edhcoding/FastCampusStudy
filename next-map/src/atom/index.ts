@@ -1,8 +1,8 @@
-import { LocationType, StoreDataType } from "@/interface";
+import { LocationType, searchType, StoreDataType } from "@/interface";
 import { atom } from "recoil";
 
-const DEFAULT_LAT = 37.497625203; // 위도
-const DEFAULT_LNG = 127.03088379; // 경도
+const DEFAULT_LAT = "37.497625203"; // 위도
+const DEFAULT_LNG = "127.03088379"; // 경도
 const DEFAULT_ZOOM = 3;
 
 export const mapState = atom({
@@ -25,4 +25,9 @@ export const locationState = atom<LocationType>({
     lng: DEFAULT_LNG,
     zoom: DEFAULT_ZOOM,
   },
+});
+
+export const searchState = atom<searchType | null>({
+  key: "search",
+  default: null,
 });

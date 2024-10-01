@@ -3,7 +3,6 @@ import Map from "@/components/Map";
 import Marker from "@/components/Marker";
 import { StoreDataType } from "@/interface";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
@@ -11,7 +10,6 @@ import { useQuery } from "react-query";
 export default function StoreDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-  const { status } = useSession();
 
   const fetchStore = async () => {
     const { data } = await axios(`/api/stores?id=${id}`);

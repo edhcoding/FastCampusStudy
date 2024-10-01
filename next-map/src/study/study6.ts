@@ -152,4 +152,13 @@
  * 헤더: Authorization: KakaoAK${REST_API_KEY} 인증방식, REST API 키로 인증 요청
  * 쿼리: 검색을 원하는 질의어를 string 값으로 요청
  * 응답: documents 내에 x값(X좌표값/경도), y값(Y좌표값/위도) 저장
+ * 
+ * 
+ * 
+ * 
+ * 참고 사이트
+ * - react-daum-postcode: https://www.npmjs.com/package/react-daum-postcode
+ * - 카카오 주소 검색 APl: https://developers.kakao.com/docs/latest/ko/local/dev-guide
+ * - 다음 우편번호 서비스: https://postcode.map.daum.net/guide
+ * - useForm의 setValue함수: https://react-hook-form.com/docs/useform/setvalue#main
  */

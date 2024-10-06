@@ -8,6 +8,13 @@ export interface StoreDataType {
   category?: string | null; // bizcnd_code_nm
   storeType?: string | null; // cob_code_nm
   foodCertifyName?: string | null; // crtfc_gbn_nm
+  likes?: LikeInterface[];
+}
+
+export interface LikeInterface {
+  id: number;
+  storeId: number;
+  userId: number;
 }
 
 export interface StoreApiResponse {

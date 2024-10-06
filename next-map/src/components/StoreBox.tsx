@@ -10,6 +10,7 @@ import {
 } from "react-icons/ai";
 import { HiOutlineMapPin } from "react-icons/hi2";
 import { useRecoilState } from "recoil";
+import Like from "./Like";
 
 export default function StoreBox() {
   const router = useRouter();
@@ -42,13 +43,16 @@ export default function StoreBox() {
                 <AiOutlineClose />
               </button>
             </div>
-            <div className="mt-4 flex gap-2 items-center">
-              <HiOutlineMapPin />
-              {currentStore?.address}
+            <div className="flex justify-between gap-4">
+              <div className="mt-4 flex gap-2 items-center col-span-3">
+                <HiOutlineMapPin />
+                {currentStore?.address || "주소가 없습니다."}
+              </div>
+              <Like storeId={currentStore.id} />
             </div>
             <div className="mt-2 flex gap-2 items-center">
               <AiOutlinePhone />
-              {currentStore?.phone}
+              {currentStore?.phone || "전화번호가 없습니다."}
             </div>
             <div className="mt-2 flex gap-2 items-center">
               <AiOutlineInfoCircle />

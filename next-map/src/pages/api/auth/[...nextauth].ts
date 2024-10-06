@@ -4,14 +4,16 @@ import GoogleProvider from "next-auth/providers/google";
 import NaverProvider from "next-auth/providers/naver";
 import KakaoProvider from "next-auth/providers/kakao";
 import prisma from "@/db";
+import { NextAuthOptions } from "next-auth";
+import { Adapter } from "next-auth/adapters";
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt" as const,
     maxAge: 24 * 60 * 60, // 1 days
     updateAge: 2 * 60 * 60, // 2 hours
   },
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
 
   providers: [
     GoogleProvider({
@@ -27,8 +29,25 @@ export const authOptions = {
       clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
     }),
   ],
+
   pages: {
     signIn: "/users/login",
+  },
+
+  callbacks: {
+    session: ({ session, token }) => ({
+      ...session,
+      user: {
+        ...session.user,
+        id: token.sub,
+      },
+    }),
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
+    },
   },
 };
 

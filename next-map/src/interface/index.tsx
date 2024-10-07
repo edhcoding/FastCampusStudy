@@ -24,6 +24,20 @@ export interface LikeApiResponse {
   totalPage?: number;
 }
 
+export interface CommentInterface {
+  id: number;
+  storeId: number;
+  userId: number;
+  store?: StoreDataType;
+  body: string;
+}
+
+export interface CommentApiResponse {
+  data: CommentInterface[];
+  page?: number;
+  totalPage?: number;
+}
+
 export interface StoreApiResponse {
   data: StoreDataType[];
   page?: number;

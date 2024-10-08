@@ -152,13 +152,98 @@
  * 헤더: Authorization: KakaoAK${REST_API_KEY} 인증방식, REST API 키로 인증 요청
  * 쿼리: 검색을 원하는 질의어를 string 값으로 요청
  * 응답: documents 내에 x값(X좌표값/경도), y값(Y좌표값/위도) 저장
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  * 참고 사이트
  * - react-daum-postcode: https://www.npmjs.com/package/react-daum-postcode
  * - 카카오 주소 검색 APl: https://developers.kakao.com/docs/latest/ko/local/dev-guide
  * - 다음 우편번호 서비스: https://postcode.map.daum.net/guide
  * - useForm의 setValue함수: https://react-hook-form.com/docs/useform/setvalue#main
+ */
+
+/**
+ * 현재 위치로 이동하기
+ * Geolocation API란?
+ * - Geolocation API: 사용자의 현재 위치를 얻기 위해 사용되는 JS API로, 웹 애플리케이션에서 위치 기반 서비스를 개발하는 데 유용함
+ * - 사용자의 브라우저를 통해 위치 정보를 수집할 수 있으며, 위치 기반 서비스를 개발할 때 유용함
+ * - Geolocation API를 사용하면 웹 애플리케이션에서 다양한 기능을 개발할 수 있음
+ * Ex) 사용자의 현재 위치를 기반으로 가까운 상점 찾기, 날씨 정보 표시, 길 안내 등의 서비스를 제공
+ * - 다만, 사용자의 동의를 받아 위치 정보를 수집하므로 개인정보 보호에 주의                     !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * - Geolocation API는 navigator.geolocation 객체를 통해 사용할 수 있음
+ *
+ *
+ *
+ *
+ *
+ *
+ * Geolocation API 예제: 현재 위치 가져오기
+ * - 현재 위치는 getCurrentPosition() 메서들를 활용해서 가져올 수 있음
+ * - 사용자의 위치를 탐지하기 위한 비동기 요청을 보내고, 하드웨어로부터 위치 정보를 가져와 콜백 함수 호출
+ * - (Optional) 콜백 함수 이외에도 실패했을 때 처리하는 콜백함수와 옵션값들을 매개변수로 지정할 수 있음
+ *
+ * navigator.geolocation.getCurrentPosition((position) => {
+ *  doSomething(position.coords.latitude, position.coords.longitude);
+ * });
+ *
+ * navigator.geolocation.getCurrentPosition(success, error, [options]);
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * Geolocation API 사용 예시 (geolocation1 사진)
+ * 1. 사용자 브라우저에서 위치 정보 동의 얻기
+ * - Geolocation 객체가 존재하는 경우에만 위치 정보 서비스를 지원
+ * 2. Geolocation API를 사용해 위치정보 요청 & 처리
+ * 3. 위치 정보 성공적으로 수집 후, 원하는 작업 수행
+ * - 실패할경우, 예외처리
+ * 
+ * 
+ * ex)
+ * 1. 사용자 동의 얻기
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition (function (position) {
+  2. 위치 정보 요청 및 처리
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+  3. 위치 정보 사용 예제: 현재 위치 출력
+    console. Log("현재 위치- 위도: + Latitude + ", 경도: "+ Longitude);
+  }, function (error) {
+    // 위치 정보 요청이 실패한 경우 에러 처리
+    console.error("위치 정보를 얻을 수 없습니다. 오류:"+ error.message);
+  });
+} else {
+  console.error("이 브라우저는 Geolocation API를 지원하지 않습니다.");
+}
+
+
+
+
+
+
+Geolocation API 옵션 값
+- enableHighAccuracy: 정확한 위치 정보를 얻기 위해 높은 정확도를 사용할지 여부 (true/false)
+- timeout: 위치 정보를 얻는 데 허용되는 시간 (밀리초)
+- maximumAge: 이전에 얻은 위치 정보의 유효 기간 (밀리초)
+
+ex)
+const options = {
+  enableHighAccuracy: true,
+  maximumAge: 30000,
+  timeout: 27000,
+};
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+
+
+
+참고할 사이트
+- 카카오 지도 API -geolocation으로 마커 표시하기: https://apis.map.kakao.com/web/sample/geolocationMarker/
+- 카카오 지도 API - panTo (중심 좌표 이동): https://apis.map.kakao.com/web/documentation/#Map-panTo
+- (Mozilla) Geolocation API 도큐: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
  */

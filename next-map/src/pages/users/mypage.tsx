@@ -1,7 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
+import CommentList from "@/components/comments/CommentList";
+import Pagination from "@/components/Pagination";
+import { CommentApiResponse } from "@/interface";
+import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useQuery } from "react-query";
 
 export default function MyPage() {
+  const router = useRouter();
+  const { page = "1" } = router.query;
+
+  const fetchComments = async () => {
+    const { data } = await axios(
+      `/api/comments?limit=5&page=${page}&user=${true}` // 현재 로그인된 사용자의 댓글만 가져오게 하기위해서 user=true => 이 부분은 api 파일에서 작성예정
+    );
+
+    return data as CommentApiResponse;
+  };
+
+  const { data: comments } = useQuery(`comments-${page}`, fetchComments);
+
   const { data: session } = useSession();
 
   return (
@@ -42,7 +61,7 @@ export default function MyPage() {
                 alt="프로필 이미지"
                 width={48}
                 height={48}
-                className="rounded-full"
+                className="rounded-full size-12"
               />
             </dd>
           </div>
@@ -62,6 +81,20 @@ export default function MyPage() {
           </div>
         </dl>
       </div>
+      <div className="mt-8 px-4 sm:px-0">
+        <h3 className="text-base font-semibold leading-7 text-gray-900">
+          내가 쓴 댓글
+        </h3>
+        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+          댓글 리스트
+        </p>
+      </div>
+      <CommentList comments={comments} displayStore={true} />
+      <Pagination
+        totalPage={comments?.totalPage}
+        page={page as string}
+        pathname="/users/mypage"
+      />
     </div>
   );
 }

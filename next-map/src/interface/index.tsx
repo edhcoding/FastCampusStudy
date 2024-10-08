@@ -30,6 +30,15 @@ export interface CommentInterface {
   userId: number;
   store?: StoreDataType;
   body: string;
+  user?: UserType;
+  createdAt: Date;
+}
+
+export interface UserType {
+  id: number;
+  email?: string | null;
+  name?: string | null;
+  image?: string | null;
 }
 
 export interface CommentApiResponse {

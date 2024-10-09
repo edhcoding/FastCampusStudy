@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { currentStoreState, locationState, mapState } from "@/atom";
 import { StoreDataType } from "@/interface";
 import { useCallback, useEffect } from "react";

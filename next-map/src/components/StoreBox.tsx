@@ -1,7 +1,8 @@
+"use client";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { currentStoreState } from "@/atom";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import {
   AiOutlineCheck,
   AiOutlineClose,
@@ -11,6 +12,7 @@ import {
 import { HiOutlineMapPin } from "react-icons/hi2";
 import { useRecoilState } from "recoil";
 import Like from "./Like";
+import { useRouter } from "next/navigation";
 
 export default function StoreBox() {
   const router = useRouter();

@@ -210,16 +210,59 @@
  * 1) children props를 통해 하위의 경로 감쌈
  * - Templates: 템플릿은 레이아웃과 비슷하게 layout, page를 감싸지만, 상태유지 X (새로운 인스턴스 생성)
  * 1) 특별한 상황이 아닌 경우, layout 사용 권장
- * 
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
  * 라우트 그룹 (Route Groups)
  * - 폴더를 Route 그룹으로 표시하여 해당 폴더가 경로의 URL 경로에 포함되지 않도록 할 수 있음
  * - 왜? Route Group을 통해 URL 경로 구조에 영향을 주지않고, 라우트 세그먼트와 프로젝트 파일을 논리적으로 구성
  * - 컨벤션: 폴더 이름을 괄호로 묶음으로써 생성 (name)
  * 1) 각각의 Route Group 마다 같은 URL 계층을 가져도, 다른 layout을 적용
  * - (marketing), (shop)은 app 하단의 최상위 루트지만, Route Group을 이용해서 별개의 레이아웃 구성
+ */
+
+/**
+ * app router로 마이그레이션 하기
+ *
+ * 참고)
+ * Data Fetching에서 fetch API로 업그레이드 할 때, http://localhost:3000가 아닌 http:// 127.0.0.1:3000 으로 서버 실행 & 빌드 해줘야 함
+ * 1) Localhost:3000로 사용하면 로컬에서 Same-Origin Policy 때문에 빌드 에러가 날 수 있음
+ * 2) 따라서 카카오 개발자 센터, 네이버 개발자 센터, 구글 클라우드 콘솔에서 callback URL를 127.0.0.1:3000 으로 변경하고 진행
+ * - 이번 강의에서는 Next.js API Route를 'stores'와 'nextauth' 부분만 변경할 계획
+ * 1) 기존 Pages/api와도 잘 실행이 되는지 확인하기
+ *
+ *
+ *
+ *
+ *
+ * 순서 (https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration)
+ * 1. yarn add next@latest 로 최신버전 설치
+ * 2. app 디렉토리 만들고 RootLayout 생성
+ * - 기존 _app.tsx 코드 가져오기 (provider.tsx 만들어서 코드 구분해주고 layout.tsx에서 import해옴)
+ * 3. metadata 임포트해서 사용하기
+ * ex)
+ * import { Metadata } from 'next'
+ *
+ * export const metadata: Metadata = {
+ *  title: 'My Page Title',
+ * }
+ *
+ * export default function Page() {
+ *  return '...'
+ * }
+ * 4. _app.tsx, _document.tsx 삭제
+ * 5. env => http://localhost:3000 => http://127.0.0.1:3000
+ * 6. page => index.tsx 를 app => page.tsx로 페이지 라우팅 변경
+ * 7. getServerSideProps를 fetch api를 사용해서 cache: no-store로 사용 및 변경
+ * 8. useRouter는 next/router => next/navigation 으로 변경
+ * 9. kakao developer에서 callback url 변경해야함 (https://developers.kakao.com/console/app/1135563/config/platform)
+ * - 플랫폼 => http://localhost:3000 삭제 말고 하나 더 추가 + http://127.0.0.1:3000
+ * - 카카오 로그인에서 Redirect URI에서도 http://127.0.0.1:3000/api/auth/callback/kakao 추가
+ * 10. 네이버 개발자센터 (https://developers.naver.com/main/)
+ * - 내 애플리케이션 => NextMap 에서 네이버 로그인 callback url 에도 http://127.0.0.1:3000/api/auth/callback/naver 추가
+ * 11. google cloud console (https://console.cloud.google.com/welcome?project=next-map-436710)
+ * - OAuth 2.0 클라이언트 ID 에서 승인된 JavaScript 원본에 http://127.0.0.1:3000 추가, 승인된 리디렉션 URI에 http://127.0.0.1:3000/api/auth/callback/google 추가
  */

@@ -9,17 +9,20 @@ import { StoreDataType } from "@/interface";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 
-export default function StoreDetailPage({
-  params,
-}: {
+interface StoreDetailPageProps {
   params: { id: string };
-}) {
+}
+
+export default function StoreDetailPage({ params }: StoreDetailPageProps) {
   const router = useRouter();
   const id = params.id;
+
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || "1";
 
   const { status } = useSession();
 
@@ -168,7 +171,7 @@ export default function StoreDetailPage({
             <Map lat={store?.lat} lng={store?.lng} zoom={1} />
             <Marker store={store} />
           </div>
-          <Comments storeId={store.id} />
+          <Comments storeId={store.id} searchParamsPage={page} />
         </>
       )}
     </>

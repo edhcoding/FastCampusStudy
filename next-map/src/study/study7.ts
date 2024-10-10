@@ -272,3 +272,65 @@
  * - ex) export async function GET(request: Request) {}
  * - 참고 (https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
  */
+
+/**
+ * Vercel 주요 기능
+ * - 웹 애플리케이션 호스팅: 정적 파일로 구성된 웹 애플리케이션 배포 & 호스팅
+ * - 빠른 배포: Git 저장소와 연동하여 변경사항이 발생하면 자동으로 배포
+ * - CI/CD 통합: GitHub Actions, GitLab CI 등과 연동하여 지속적 통합 & 배포 설정
+ * - 환경 변수 관리: 환경 변수 설정 지원 & 애플리케이션의 보안과 환경 설정 관리
+ * - 도메인 관리: 사용자의 도메인을 Vercel 플랫폼에 연결할 수 있도록 도와줌
+ * - 서버리스 함수: Serverless Functions를 제공하여 손쉽게 백엔드 기능 구축 가능
+ * - 애널리틱스: 애플리케이션 성능 및 사용통계 수집 & 모니터링 도구 제공
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * Vercel로 배포하기
+ * - Vercel CLI로 배포:
+ * 1) 프로젝트 디렉토리에서 Vercel CLI를 사용해서 수동 배포
+ * 2) 명령어: Vercel
+ * - Github/GitLab 연동 배포(Github import)
+ * 1) Github/GitLab과 Vercel를 연동하여 저장소에 변경사항이 푸시될 때 마다 자동으로 배포
+ * - 환경 변수 설정: Vercel 대시보드나 CLI를 통해 환경변수 설정
+ *
+ *
+ *
+ *
+ *
+ *
+ * Vercel의 Github Import (CI/CD란?)
+ * - Vercel의 Github Import는 CI/CD (Continuous Integration 지속적인 통합/ Continuous Deployment 지속적인 배포) 프로세스의 일부
+ * - Continuous Integration (CI): 개발자나 팀이 코드 변경을 일일이 검사하지 않고도 코드의 품질과 안정 성을 유지하도록 도와주는 프로세스
+ * 1)코드 변경이 이루어질 때마다 자동으로 테스트, 빌드 및 코드 검사를 수행하고, 오류를 미리 감지
+ * - Continuous Deployment (CD): CD는 CI의 확장으로, 코드 변경이 CI 테스트를 통과하면 자동으로 프 로덕션 환경에 배포되도록 하는 프로세스
+ * 1) 이를 통해 새로운 기능과 버그 수정 사항이 빠르게 사용자에게 제공
+ */
+
+/**
+ * Vercel로 배포하기 (Github Import)
+ * - Github를 연동하여 배포하는 방식으로 진행: Github Import는 Vercel에서 Github 리포지토리를 가져와 프로젝트를 배포하는 간단한 방법
+ *
+ * 1. Vercel 계정 생성
+ * 2. 프로젝트 생성: 대시보드에서 "New Project"나 "Import Project"버튼을 클릭하여 새 프로젝트 생성
+ * 3. Github Import: "Import Git Repository"를 선택하고 GitHub 계정에 로그인. 원하는 레포 import
+ * 4. 배포 구성: Vercel은 프로젝트를 자동으로 감지하고 배포 구성을 설정함 (빌드 및 환경변수 추가 설정)
+ * 5. 배포: 프로젝트를 배포하려면 "Deploy" 버튼을 클릭.(이후에는 설정한 브랜치에 푸시하면 자동 배포)
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * 배포 후 수정사항:
+ * - Vercel에 환경변수 추가
+ * - Vercel에 Build Command 수정 - npx prisma generate && next build
+ * Build & Development Setting 설정에서 => Build Command에 npx prisma generate && next build 작성하고 => override 토글해서 켜줌
+ * - 카카오 디벨로퍼에서 배포된 URL 추가: https://developers.kakao.com/
+ * - 네이버 디벨로퍼에서 배포된 URL 추가: https://developers.naver.com/
+ * - 구글 API에서 배포된 URL 추가: https://console.cloud.google.com/apis/credentials
+ */

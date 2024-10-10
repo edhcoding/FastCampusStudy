@@ -12,6 +12,7 @@ import { useQuery } from "react-query";
 export default function MyPage() {
   const searchParams = useSearchParams();
   const page = searchParams.get("page") || "1";
+  // url로 query 받는 경우네는 params 말고 searchParams 사용해야함
 
   const fetchComments = async () => {
     const { data } = await axios(

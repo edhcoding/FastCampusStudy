@@ -8,26 +8,22 @@ import Pagination from "../Pagination";
 
 interface CommentsProps {
   storeId: number;
-  params?: {
-    page?: string;
-  };
+  searchParamsPage: string;
 }
 
-export default function Comments({ storeId, params }: CommentsProps) {
+export default function Comments({ storeId, searchParamsPage }: CommentsProps) {
   const { status } = useSession();
-
-  const page = params?.page || "1";
-
+  
   const fetchComments = async () => {
     const { data } = await axios(
-      `/api/comments?storeId=${storeId}&limit=5&page=${page}`
+      `/api/comments?storeId=${storeId}&limit=5&page=${searchParamsPage}`
     );
 
     return data as CommentApiResponse;
   };
 
   const { data: comments, refetch } = useQuery(
-    `comments-${storeId}-${page}`,
+    `comments-${storeId}-${searchParamsPage}`,
     fetchComments
   );
 
@@ -41,7 +37,7 @@ export default function Comments({ storeId, params }: CommentsProps) {
       <CommentList comments={comments} />
       {/* pagination */}
       <Pagination
-        page={page as string}
+        page={searchParamsPage as string}
         totalPage={comments?.totalPage}
         pathname={`/stores/${storeId}`}
       />

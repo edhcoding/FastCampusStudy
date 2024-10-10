@@ -6,10 +6,12 @@ import Pagination from "@/components/Pagination";
 import { CommentApiResponse } from "@/interface";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
 
-export default function MyPage({ params }: { params: { page: string } }) {
-  const page = params?.page || "1";
+export default function MyPage() {
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page") || "1";
 
   const fetchComments = async () => {
     const { data } = await axios(

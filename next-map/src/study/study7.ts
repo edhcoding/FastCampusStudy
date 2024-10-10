@@ -265,4 +265,10 @@
  * - 내 애플리케이션 => NextMap 에서 네이버 로그인 callback url 에도 http://127.0.0.1:3000/api/auth/callback/naver 추가
  * 11. google cloud console (https://console.cloud.google.com/welcome?project=next-map-436710)
  * - OAuth 2.0 클라이언트 ID 에서 승인된 JavaScript 원본에 http://127.0.0.1:3000 추가, 승인된 리디렉션 URI에 http://127.0.0.1:3000/api/auth/callback/google 추가
+ * 12. global error 핸들링 해주기
+ * - app 파일 루트에 global-error.tsx 파일 생성 (https://nextjs.org/docs/app/building-your-application/routing/error-handling)
+ * 13. API Routes
+ * - pages/api => app/api/route.ts
+ * - ex) export async function GET(request: Request) {}
+ * - 참고 (https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
  */

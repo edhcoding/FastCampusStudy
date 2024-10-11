@@ -20,7 +20,7 @@ export default async function Home() {
 async function getData() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`, {
-      cache: "no-store",
+      cache: "force-cache",
     });
 
     if (!res.ok) {

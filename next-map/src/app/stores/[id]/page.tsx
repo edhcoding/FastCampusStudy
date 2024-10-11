@@ -10,6 +10,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 
@@ -171,7 +172,9 @@ export default function StoreDetailPage({ params }: StoreDetailPageProps) {
             <Map lat={store?.lat} lng={store?.lng} zoom={1} />
             <Marker store={store} />
           </div>
-          <Comments storeId={store.id} searchParamsPage={page} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Comments storeId={store.id} searchParamsPage={page} />
+          </Suspense>
         </>
       )}
     </>

@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import { NextLayout, NextProvider } from "./provider";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "NextMap",
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextProvider>
-          <NextLayout>{children}</NextLayout>
+          <NextLayout>
+            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          </NextLayout>
         </NextProvider>
       </body>
     </html>

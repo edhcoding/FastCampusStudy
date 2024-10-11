@@ -7,6 +7,7 @@ import { CommentApiResponse } from "@/interface";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { useQuery } from "react-query";
 
 export default function MyPage() {
@@ -22,7 +23,9 @@ export default function MyPage() {
     return data as CommentApiResponse;
   };
 
-  const { data: comments } = useQuery(`comments-${page}`, fetchComments);
+  const { data: comments } = useQuery(`comments-${page}`, fetchComments, {
+    suspense: true,
+  });
 
   const { data: session } = useSession();
 
@@ -92,12 +95,14 @@ export default function MyPage() {
           댓글 리스트
         </p>
       </div>
-      <CommentList comments={comments} displayStore={true} />
-      <Pagination
-        totalPage={comments?.totalPage}
-        page={page as string}
-        pathname="/users/mypage"
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <CommentList comments={comments} displayStore={true} />
+        <Pagination
+          totalPage={comments?.totalPage}
+          page={page as string}
+          pathname="/users/mypage"
+        />
+      </Suspense>
     </div>
   );
 }

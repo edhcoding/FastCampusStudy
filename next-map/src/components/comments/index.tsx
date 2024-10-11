@@ -11,9 +11,12 @@ interface CommentsProps {
   searchParamsPage: string;
 }
 
-export default function Comments({ storeId, searchParamsPage }: CommentsProps) {
+export default function Comments({
+  storeId,
+  searchParamsPage = "1",
+}: CommentsProps) {
   const { status } = useSession();
-  
+
   const fetchComments = async () => {
     const { data } = await axios(
       `/api/comments?storeId=${storeId}&limit=5&page=${searchParamsPage}`

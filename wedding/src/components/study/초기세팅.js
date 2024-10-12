@@ -85,11 +85,11 @@
  * - yarn add -D @craco/craco craco-alias
  * - Craco Alias 설정 (import App from "../../../../App.js" 싫어!)
  * - Craco란? create-react-app configuration override 약자, CRA에 config 설정을 덮어쓰기 위한 패키지임
- * 
+ *
  * 17. tsconfig.paths.json 파일 생성 및 작성
- * 
+ *
  * 18. craco.config.js 파일 생성 및 작성
- * 
+ *
  * 19. scss 설치
- * - yarn add classnames sass
+ * - yarn add classnames sass (@types/classnames 강의에는 없었지만 타입도 설치!)
  */

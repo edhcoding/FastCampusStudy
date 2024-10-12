@@ -1,22 +1,55 @@
 {
+  // 다른 tsconfig 파일을 확장합니다. 여기서는 경로(alias) 설정이 담긴 tsconfig.paths.json 파일을 불러옵니다.
   "extends": "./tsconfig.paths.json",
   "compilerOptions": {
+    // 컴파일된 JavaScript 코드의 목표 ECMAScript 버전을 설정합니다. 여기서는 ES5로 설정되었습니다.
     "target": "es5",
+
+    // 프로젝트에서 사용할 라이브러리를 설정합니다. DOM, DOM iterable 객체 및 최신 ESNext 기능을 사용할 수 있게 합니다.
     "lib": ["dom", "dom.iterable", "esnext"],
+
+    // .js 파일도 TypeScript 컴파일러가 처리하도록 허용합니다.
     "allowJs": true,
+
+    // 타입 정의 파일을 검사하지 않도록 설정하여 컴파일 속도를 높입니다.
     "skipLibCheck": true,
+
+    // CommonJS 모듈을 ES6 모듈처럼 사용할 수 있도록 지원합니다.
     "esModuleInterop": true,
+
+    // default import를 허용합니다. 이는 ES6 모듈 구문에서 기본값 가져오기를 지원하기 위한 설정입니다.
     "allowSyntheticDefaultImports": true,
+
+    // 엄격한 타입 검사 모드를 활성화합니다. 이는 TypeScript에서 강력한 타입 체크를 할 수 있게 합니다.
     "strict": true,
+
+    // 파일 이름의 대소문자 일관성을 강제합니다. 운영체제에 관계없이 파일 이름의 대소문자가 일치해야 합니다.
     "forceConsistentCasingInFileNames": true,
+
+    // switch 문에서 break를 놓친 경우 에러를 발생시키는 설정입니다.
     "noFallthroughCasesInSwitch": true,
+
+    // 모듈 시스템을 ESNext로 설정하여 최신 ECMAScript 모듈 시스템을 사용합니다.
     "module": "esnext",
+
+    // Node.js의 모듈 해석 방식을 사용합니다. 이는 모듈을 파일 시스템에서 찾을 때 Node.js의 해석 규칙을 따르도록 설정합니다.
     "moduleResolution": "node",
+
+    // TypeScript에서 JSON 모듈을 import할 수 있도록 설정합니다.
     "resolveJsonModule": true,
+
+    // 개별 모듈로 취급하여 각 파일을 독립적으로 컴파일합니다. Babel과 같은 도구와 함께 사용할 때 유용합니다.
     "isolatedModules": true,
+
+    // 실제로 컴파일된 파일을 생성하지 않도록 설정합니다. 주로 타입 검사에만 사용됩니다.
     "noEmit": true,
+
+    // React 17 이상에서 새로운 JSX 변환 방식을 사용하도록 설정합니다.
     "jsx": "react-jsx",
-    "types": ["jest", "@testing-library/jest-dom"] //
+
+    // Jest와 Testing Library 관련 타입 정의를 사용하도록 설정합니다.
+    "types": ["jest", "@testing-library/jest-dom"]
   },
+  // 프로젝트에서 포함할 파일 및 디렉터리를 지정합니다. 여기서는 src 디렉터리와 tsconfig.paths.json 파일이 포함됩니다.
   "include": ["src", "tsconfig.paths.json"]
 }

@@ -15,18 +15,25 @@
  * ex) <link href="폰트 서비스" />
  * 2. 폰트 다운로드
  * ex) @font-face {font-family: "폰트이름"; src: url("폰트경로");}
- * 
- * 
- * 
+ *
+ *
+ *
  * 웹 폰트 서비스를 이용하는 방법 (Naver font)
  * 1. https://hangeul.naver.com/font
  * 2. 마음에 드는 폰트를 찾는다
  * 3. 웹 폰트 url을 가져온다.
  * 4. 서비스에 적용해본다
- * 
- * 
- * 
+ *
+ *
+ *
  * 폰트 다운로드 방법
  * 다운 받으면 보통 ttf일 경우가 많은데 우리는 WOFF를 사용할거기 때문에 변환사이트 들어가줘야함
  * https://cloudconvert.com/
+ */
+
+/**
+ * json-server 데이터 가져오기
+ * 1. fetch 함수를 이용하여 json-server의 데이터를 가져온다
+ * 2. 로딩 상태를 추가하여 로딩 컴포넌트 노출
+ * 3. 에러 상태를 추가하여 에러 컴포넌트 노출
  */

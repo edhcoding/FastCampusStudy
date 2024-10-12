@@ -1,9 +1,15 @@
 @charset "utf-8";
 
+@import url('./font.scss');
+
 // kanban set??
 :root {
   --red: #ea7664;
   --black: #544f4f;
   --brown: #89757a;
   --beige: #f6f5f5;
+}
+
+body {
+  font-family: 'JUA';
 }

@@ -414,12 +414,12 @@
  * - CNAME 레코드(Canonical Name Record): 도메인의 별칭을 설정하는 데 사용
  * - SOA 레코드(Start of Authority): DNS에서 특정 도메인 을 관리하는 주요 서버를 식별하고 해당 도메인의 기본 설정 을 제어하기 위한 정보 제공
  * - TTL(Time to Live): DNS 레코드가 캐시된 정보를 얼마나 오래 사용할지를 결정하는 시간
- * 
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
  * GoDaddy에서 도메인 구매 & 연결하기
  * 1. GoDaddy에서 도메인 구매
  * 2. Vercel에서 구매한 도메인으로 설정
@@ -429,14 +429,72 @@
  *  - Vercel이 제공하는 DNS 레코드 (CNAME 레코드 또는 A 레코드)를 GoDaddy의 DNS 설정에 추가
  * 4. 도메인 포트폴리오 > 도메인 잠금 끄기
  *  - 이후, 네임 서버를 Vercel에서 제공하는 네임서버로 변경
- * 
- * 
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
+ *
+ *
  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
  * 주의) (godday2 사진)
  * - 도메인은 유료입니다 (도메인에 따라 가격 천차만별)
  * - 1년만 사용하고 싶으시다면, "자동 갱신"을 off로 꺼주어야함 (다음 해에 더 비싼 가격으로 청구)
+ */
+
+/**
+ * Googl Analytics란? (https://analytics.google.com/)
+ * Googl Analytics: 웹 사이트 및 앱의 트래픽 및 사용자 행동을 분석하는 데 사용되는 Google의 무료 웹 분석 도구
+ * - 추적 코드 설치: Google Analytics를 사용하기 위해서는 해당 웹 사이트 또는 앱에 추적 코드를 설치
+ * - 데이터 수집: 사용자의 활동을 추적하고 이벤트, 페이지 뷰, 컨버전 등 다양한 데이터를 수집
+ * - 보고서 및 대시보드: 수집한 데이터를 기반으로 다양한 보고서와 대시보드를 생성
+ * 1) 이를 통해 트래픽, 사용자 행동, 컨버전률 등을 시각적으로 확인
+ * - 사용자 분석: 사용자 그룹을 세분화하고 사용자의 특성, 관심사, 동작 등을 분석할 수 있음
+ *
+ *
+ *
+ *
+ *
+ * Google Analytics를 왜 사용해야하는가?
+ * - 무료: Google Analytics는 기본 기능을 무료로 제공하며, 대부분의 웹 사이트나 앱에 적용하기 쉬움
+ * - 상세한 분석: 트래픽 소스, 사용자 경로, 컨버전률 등을 상세하게 분석할 수 있어 웹 사이트나 앱의 성능 향상 에 도움을 줌
+ * - 사용자 이해도 향상: 사용자가 웹 사이트나 앱에서 어떻게 상호 작용하는지 이해할 수 있으므로 사용자 경 험을 개선하는 데 도움을 줌
+ * - 트래픽 분석: 웹 사이트나 앱에 어떤 트래픽 소스에서 사용자가 유입되는지 추적
+ * - 페이지 분석: 어떤 페이지나 화면이 사용자에게 가장 많이 방문되는지, 어떤 컨텐츠가 인기 있는지를 파악
+ * - 컨버전 분석: 원하는 동작(예: 구매, 가입, 다운로드)을 완료한 사용자의 비율을 계산하고 개선 방법을 고려
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * Google Analytics 적용하기: 구글 애널리틱스 설정
+ * 1. https://analytics.google.com/ 에서 하단 설정(관리) 클릭 > 계정 만들기 & 속성 만들기
+ * 2. 속성 및 비즈니스 정보 설정 > 플랫폼 '웹' 선택
+ * 3. 웹 스트림 설정 > 웹 사이트 URL 및 스트림 이름 입력 > 스트림 만들기
+ * 4. 아래와 같은 화면이 나오면 설정 완료. 측정 ID를 복사해서 Next.js 프로젝트에 환경변수로 저장
+ *
+ *
+ *
+ *
+ * Google Analytics 적용하기: Next.js 프로젝트 설정 (https://nextjs.org/docs/messages/next-script-for-ga)
+ * 1. @types/gtagjs dev dependency로 설치
+ *   • yarn add -D @types/gtag.js (https://yarnpkg.com/package?q=gtag&name=%40types%2Fgtag.js)
+ *   • tsconfig.json에 gtag 추가해서 타입 선언 파일 지정 (types": ["@types/gtag.js"])
+ * 2. 이전 페이지에서 저장한 측정 ID를 환경변수 (.env) 파일에 저장
+ *   • NEXT_PUBLIC_GA_ID=G-XXXXXXX
+ * 3. src/lib/gtag.ts 파일을 만들어서 구글 애널리틱스 관련 타입 및 함수 정의 (https://developers.google.com/tag-platform/gtagjs/reference?hl=ko)
+ * 4. src/app/googleAnalytics.tsx 파일을 만들어서 구글 스크립트 로드
+ * 5. src/app/layout.tsx에서 앞서 만든 googleAnalytics 컴포넌트 로드
+ *   • 위 상세 코드는 다음장에 설명
+ *
+ *
+ *
+ *
+ * Google Analytics 적용하기: 배포 후 설정
+ * - 환경변수 (NEXT_PUBLIC_GA_ID) 추가 후 재배포
+ * - 데이터 수집 될 때까지 기다리기: https://analytics.google.com/analytics/web
+ *
+ *
+ *
  */

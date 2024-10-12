@@ -18,4 +18,17 @@
  * - Json server 를 이용하면 JSON 파일을 데이터베이스처럼 동작하게 할 수 있고, HTTP
  * 메서드를 활용하여 데이터에 접근하고 수정 할 수 있는 api 를 만들 수 있습니다.
  * - https://github.com/typicode/json-server
+ * - https://github.com/typicode/json-server/tree/v0 이게 더 자세한거 같음
+ * 
+ * 
+ * 
+ * 
+ * JSON Server 설치
+ * - -g 글로벌로 설치하면 컴퓨터 용량도 먹고 안좋음 현재 프로젝트에서는 -D 데브데펜던시로 설치할거임
+ * - yarn add -D json-server
+ * 
+ * - 최상위 루트에 db.json 파일 생성하고 초기값으로는 홈페이지 값 넣어줌
+ * - 실행해야하므로 package.json script에다가 "dev:db": "json-server db.json --watch --port=8888" 넣어줌
+ * 포트는 다르게 넣어줌 CRA dev port랑 겹치므로 8888로 넣어줌
+ * watch 옵션을 꼭 넣어줘야함 아니면 db.json을 중간에 수정하면 바로바로 반영안돼서 껏따 다시 dev:db 해야함 (실시간 동기화 느낌)
  */

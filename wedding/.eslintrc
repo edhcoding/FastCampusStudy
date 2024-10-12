@@ -1,0 +1,9 @@
+{
+  "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
+// yarn remove eslint => yarn add -D eslint@8.57.0  v9는 버전오류가 많이 있어서 일부러 낮춤
+// .eslintrc.json => .elintrc로 파일 이름도 변경

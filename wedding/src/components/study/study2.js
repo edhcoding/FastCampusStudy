@@ -70,4 +70,11 @@
  * flicking 라이브러리 이용해서 좌우로 넘기는 기능 구현
  * 공식 홈 - https://naver.github.io/egjs-flicking/ko/
  * 깃허브 - https://github.com/naver/egjs-flicking
+ *
+ *
+ * flicking 라이브러리보다 swiper가 더 좋아서 swiper 사용할 거임 (swiper가 더 용량이 작음)
+ * swiper 라이브러리 사용(https://v9.swiperjs.com/react#styles)
+ * - yarn add swiper@^9 (10버전도 있는데 9버전이 안정화 되어 있어서)
+ *
+ * 비교차트 (https://npmtrends.com/carousel-vs-egjs-vs-swiper)
  */

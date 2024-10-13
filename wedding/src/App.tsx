@@ -1,14 +1,16 @@
-import classNames from 'classnames/bind'
 import { useEffect, useState } from 'react'
-
+import classNames from 'classnames/bind'
 import styles from './App.module.scss'
-import FullScreenMessage from './components/shared/FullScreenMessage'
+import FullScreenMessage from '@shared/FullScreenMessage'
+import Heading from '@components/sections/Heading'
+import Video from '@components/sections/Video'
+import { Wedding } from '@models/wedding'
 
 const cx = classNames.bind(styles)
 // bind를 해주지 않으면 styles.을 계속 붙여 줘야 한다. 꼭 bind 해서 쓸 것!
 
 function App() {
-  const [wedding, setWedding] = useState(null)
+  const [wedding, setWedding] = useState<Wedding | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isError, setIsError] = useState<boolean>(false)
 
@@ -44,7 +46,19 @@ function App() {
     return <FullScreenMessage type="error" />
   }
 
-  return <div className={cx('container')}>{JSON.stringify(wedding)}</div>
+  if (wedding === null) {
+    return null
+  }
+
+  const { date } = wedding
+
+  return (
+    <div className={cx('container')}>
+      <Heading date={date} />
+      <Video />
+      {JSON.stringify(wedding)}
+    </div>
+  )
 }
 
 export default App

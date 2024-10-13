@@ -37,3 +37,29 @@
  * 2. 로딩 상태를 추가하여 로딩 컴포넌트 노출
  * 3. 에러 상태를 추가하여 에러 컴포넌트 노출
  */
+
+/**
+ * 웹에서 많이 사용되는 비디오 포맷
+ * - MP4 (MPEG-4 Part 14): MP4는 최신 웹 브라우저 대부분과 호환되는 인터넷 친화적인 비디오 포맷입니다.
+ * 이 포맷은 품질이 좋고 파일 크기가 작아, 웹에서 동영상을 재생하는데 인기 있는 선택지입니다.
+ * - WebM: WebM은 HTML5 비디오 및 오디오 태그와 함께 사용하기 위해 Google이 개발한 비디오 포맷입니다.
+ * 고화질 동영상을 손실 없이 효과적으로 압축할 수 있는 고성능 비디오 코덱인 VP8 및 VP9를 지원합니다.
+ *
+ * 하지만 WebM이 더 좋으나 지원하지 않는 브라우저가 많으므로
+ * 우선 WebM 먼저 보여주고 지원하지 않으면 MP4를 보여주도록 할 거임
+ *
+ *
+ *
+ *
+ * video 태그 (https://developer.mozilla.org/ko/docs/Web/HTML/Element/video)
+ *
+ * video poster 속성 (https://developer.mozilla.org/ko/docs/Web/HTML/Element/video#attr-poster)
+ * 동영상이 로딩 될 때 또는 재생버튼을 누르기 전까지 보여줄 이미지
+ *
+ * 날짜 라이브러리 date-fns (https://www.npmjs.com/package/date-fns)
+ * yarn add date-fns
+ *
+ *
+ *
+ * reset css 적용 (https://meyerweb.com/eric/tools/css/reset/) !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */

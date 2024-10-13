@@ -63,3 +63,11 @@
  *
  * reset css 적용 (https://meyerweb.com/eric/tools/css/reset/) !!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
+
+/**
+ * 이미지 갤러리 구현
+ *
+ * flicking 라이브러리 이용해서 좌우로 넘기는 기능 구현
+ * 공식 홈 - https://naver.github.io/egjs-flicking/ko/
+ * 깃허브 - https://github.com/naver/egjs-flicking
+ */

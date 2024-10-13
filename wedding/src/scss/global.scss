@@ -14,3 +14,29 @@
 body {
   font-family: 'JUA';
 }
+
+// react-day-picker
+.rdp-nav,
+.rdp-month_caption {
+  display: none;
+}
+
+.rdp-day {
+  cursor: default;
+}
+
+.rdp-weekday {
+  font-size: 16px;
+}
+
+.rdp-selected {
+  background-color: var(--red);
+  border: 0;
+  border-radius: 100%;
+  color: white;
+  font-size: 16px;
+}
+
+.rdp-root {
+  --rdp-accent-color: var(--red) !important;
+}

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 interface SectionProps {
   children: React.ReactNode
   className?: string
-  title?: string
+  title?: React.ReactNode
 }
 
 const cx = classNames.bind(styles)

@@ -7,8 +7,9 @@ import Video from '@components/sections/Video'
 import { Wedding } from '@models/wedding'
 import ImageGallery from '@components/sections/ImageGallery'
 import Intro from '@components/sections/Intro'
-import Invitation from './components/sections/Invitation'
-import Calendar from './components/sections/Calendar'
+import Invitation from '@components/sections/Invitation'
+import Calendar from '@components/sections/Calendar'
+import Map from '@components/sections/Map'
 
 const cx = classNames.bind(styles)
 // bind를 해주지 않으면 styles.을 계속 붙여 줘야 한다. 꼭 bind 해서 쓸 것!
@@ -77,6 +78,7 @@ function App() {
       <Invitation invitation={invitation} />
       <ImageGallery galleryImages={galleryImages} />
       <Calendar date={date} />
+      <Map location={location} />
       {JSON.stringify(wedding)}
     </div>
   )

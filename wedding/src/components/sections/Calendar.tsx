@@ -16,8 +16,8 @@ const cx = classNames.bind(styles)
 export default function Calendar({ date }: CalendarProps) {
   const weddingDate = parseISO(date)
 
-  console.log(date) // 2024-10-15T13:00:00
-  console.log(weddingDate) // Tue Oct 15 2024 13:00:00 GMT+0900 (한국 표준시)
+  // console.log(date) // 2024-10-15T13:00:00
+  // console.log(weddingDate) // Tue Oct 15 2024 13:00:00 GMT+0900 (한국 표준시)
 
   return (
     <Section
